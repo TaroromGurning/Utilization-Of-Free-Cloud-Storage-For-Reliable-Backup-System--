@@ -35,9 +35,9 @@
             <th>Nama Job</th>
             <th>Object</th>
             <th>GDrive</th>
-            <th>Created At</th>
             <th>Last Run</th>
             <th>Status</th>
+            <th>Next Run</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -48,6 +48,7 @@
             :job="job"
             @trigger="handleTrigger"
             @view-script="handleViewScript"
+            @edit="handleEdit"
             @delete="handleDeleteJob"
           />
         </tbody>
@@ -60,6 +61,14 @@
       :job-id="currentJobId"
       :script-content="currentScript"
       @close="closeModal"
+    />
+
+    <!-- Edit Job Modal -->
+    <EditJobModal
+      :isVisible="showEditModal"
+      :jobData="selectedJob"
+      @close="closeEditModal"
+      @success="handleUpdateSuccess"
     />
 
     <!-- Toast Notification -->
@@ -91,6 +100,7 @@ import { ref, onMounted } from 'vue';
 import jobService from '@/services/jobService';
 import ManualJobRow from '@/components/ManualJobRow.vue';
 import ScriptPreview from '@/components/ScriptPreview.vue';
+import EditJobModal from '@/components/EditJobModal.vue';
 
 // State untuk jobs list
 const jobs = ref([]);
@@ -101,6 +111,10 @@ const errorMessage = ref(null);
 const isModalVisible = ref(false);
 const currentScript = ref('');
 const currentJobId = ref(null);
+
+// State untuk Edit Modal
+const selectedJob = ref(null);
+const showEditModal = ref(false);
 
 // Toast notification state
 const toast = ref({
@@ -124,6 +138,44 @@ async function fetchData() {
   } finally {
     isLoading.value = false;
   }
+}
+
+// Handle Edit - Load job data terlebih dahulu
+async function handleEdit(jobId) {
+  console.log('✅ handleEdit dipanggil dengan jobId:', jobId);
+  
+  try {
+    showToast('Memuat data job...', 'info');
+    
+    // Fetch job data dari API
+    // Backend returns: { success: true, data: { id, job_name, ... } }
+    const response = await jobService.getJobById(jobId);
+    console.log('✅ Full response from API:', response);
+    
+    // Tidak perlu extract data di sini, biarkan EditJobModal yang handle
+    // EditJobModal akan menerima full response dan extract sendiri
+    selectedJob.value = response;
+    showEditModal.value = true;
+    
+    console.log('✅ Modal opened with data:', selectedJob.value);
+  } catch (error) {
+    console.error('❌ Error loading job:', error);
+    showToast('Gagal memuat data job untuk diedit', 'error');
+  }
+}
+
+// Handle Update Success
+function handleUpdateSuccess() {
+  console.log('✅ Job berhasil diupdate');
+  closeEditModal(); // Langsung tutup modal
+  showToast('Job berhasil diperbarui!', 'success');
+  fetchData(); // Refresh job list
+}
+
+// Close Edit Modal
+function closeEditModal() {
+  showEditModal.value = false;
+  selectedJob.value = null;
 }
 
 // Handle Trigger Job

@@ -7,8 +7,6 @@ import (
 	"gorm.io/gorm"
 )
 
-const maxLogs = 20
-
 // LogRepository mendefinisikan kontrak
 type LogRepository interface {
 	CreateLog(log *models.Log) error
@@ -27,36 +25,6 @@ func NewLogRepository(db *gorm.DB) LogRepository {
 func (r *logRepositoryImpl) CreateLog(log *models.Log) error {
 	if err := r.DB.Create(log).Error; err != nil {
 		return fmt.Errorf("gagal menyimpan log baru: %w", err)
-	}
-
-	var count int64
-	if err := r.DB.Model(&models.Log{}).Count(&count).Error; err != nil {
-		fmt.Printf("Gagal menghitung Total Log: %v\n", err)
-		return nil
-	}
-
-	if count > maxLogs {
-		toDelete := count - maxLogs
-		var oldlogs []models.Log
-
-		if err := r.DB.Order("timestamp ASC").Limit(int(toDelete)).Find(&oldlogs).Error; err != nil {
-			return fmt.Errorf("gagal mengambil log paling tua: %w", &err)
-		}
-
-		if len(oldlogs) > 0 {
-			// Ambil ID dari record log tertua
-			var idsToDelete []uint
-			for _, l := range oldlogs {
-				idsToDelete = append(idsToDelete, l.ID)
-			}
-
-			// Hapus semua log tertua dalam satu transaksi
-			if err := r.DB.Where("id IN (?)", idsToDelete).Delete(&models.Log{}).Error; err != nil {
-				return fmt.Errorf("gagal menghapus log tertua: %w", err)
-			}
-			fmt.Sprintf("[LOG CLEANUP] Berhasil menghapus %d log tertua (Max: %d)\n", toDelete, maxLogs)
-
-		}
 	}
 	return nil
 }

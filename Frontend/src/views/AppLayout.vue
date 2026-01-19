@@ -23,6 +23,10 @@
           <router-link to="/manual" class="nav-item">
             <span class="nav-text">Jobs</span>
           </router-link>
+
+          <router-link to="/history" class="nav-item">
+            <span class="nav-text">History</span>
+          </router-link>
         </nav>
 
         <div class="header-actions">
@@ -33,19 +37,13 @@
       </div>
     </header>
     
-    <!-- Main Content dengan Log Panel -->
+    <!-- Main Content -->
     <div class="content-wrapper">
-      <!-- Main Content -->
       <main class="app-main">
         <transition name="fade" mode="out-in">
           <router-view />
         </transition>
       </main>
-      
-      <!-- Log Panel (Sticky di kanan) -->
-      <aside class="log-panel">
-        <SimpleLiveLog />
-      </aside>
     </div>
     
     <!-- Footer -->
@@ -53,7 +51,7 @@
       <p>© 2024 G-Backup System</p>
     </footer>
 
-    <!-- ⭐ Logout Confirmation Modal -->
+    <!-- Logout Confirmation Modal -->
     <Teleport to="body">
       <Transition name="fade">
         <div v-if="showLogoutModal" class="modal-overlay" @click="showLogoutModal = false">
@@ -84,16 +82,13 @@
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useAuthStore } from '@/stores/authStore';
-import SimpleLiveLog from '@/components/LiveLog.vue';
 
 const router = useRouter();
 const authStore = useAuthStore();
 
-// State untuk mengontrol visibilitas modal
 const showLogoutModal = ref(false);
 
 const handleLogout = () => {
-  // Buka modal alih-alih menggunakan confirm() browser
   showLogoutModal.value = true;
 };
 
@@ -105,25 +100,36 @@ const confirmLogout = () => {
 </script>
 
 <style scoped>
+/* ============================================ */
+/* APP LAYOUT - FULLSCREEN */
+/* ============================================ */
 .app-layout {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  width: 100%;
   background-color: #fafafa;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
 }
 
-/* Header */
+/* ============================================ */
+/* HEADER */
+/* ============================================ */
 .app-header {
   background: #fff;
   border-bottom: 1px solid #e5e5e5;
   position: sticky;
   top: 0;
   z-index: 100;
+  width: 100%;
 }
 
 .header-content {
+  width: 100%;
   max-width: 100%;
-  margin: 0 auto;
+  margin: 0;
   padding: 1rem 2rem;
   display: flex;
   align-items: center;
@@ -144,6 +150,12 @@ const confirmLogout = () => {
   gap: 0.25rem;
   flex: 1;
   overflow-x: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+.main-nav::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
 }
 
 .nav-item {
@@ -200,35 +212,36 @@ const confirmLogout = () => {
   border-color: #dc2626;
 }
 
-/* Content Wrapper dengan Log Panel */
+/* ============================================ */
+/* CONTENT WRAPPER - FULLSCREEN */
+/* ============================================ */
 .content-wrapper {
   flex: 1;
-  display: grid;
-  grid-template-columns: 1fr 320px;
-  gap: 1.5rem;
-  padding: 1.5rem 2rem;
+  width: 100%;
   max-width: 100%;
+  padding: 1.5rem 2rem;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 /* Main Content */
 .app-main {
-  min-width: 0;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
 }
 
-/* Log Panel (Sticky) */
-.log-panel {
-  position: sticky;
-  top: calc(60px + 1.5rem);
-  height: calc(100vh - 60px - 3rem - 60px);
-  min-width: 0;
-}
-
-/* Footer */
+/* ============================================ */
+/* FOOTER */
+/* ============================================ */
 .app-footer {
   background: #fff;
   border-top: 1px solid #e5e5e5;
   padding: 1.25rem 2rem;
   text-align: center;
+  width: 100%;
+  margin: 0;
 }
 
 .app-footer p {
@@ -237,7 +250,9 @@ const confirmLogout = () => {
   color: #666;
 }
 
-/* Transitions */
+/* ============================================ */
+/* TRANSITIONS */
+/* ============================================ */
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.2s ease;
@@ -248,18 +263,9 @@ const confirmLogout = () => {
   opacity: 0;
 }
 
-/* Responsive - Hide log panel on smaller screens */
-@media (max-width: 1200px) {
-  .content-wrapper {
-    grid-template-columns: 1fr;
-  }
-  
-  .log-panel {
-    display: none;
-  }
-}
-
-/* Logout Confirmation Modal Styles */
+/* ============================================ */
+/* MODAL STYLES */
+/* ============================================ */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -286,8 +292,14 @@ const confirmLogout = () => {
 }
 
 @keyframes modalSlide {
-  from { transform: translateY(20px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
+  from { 
+    transform: translateY(20px); 
+    opacity: 0; 
+  }
+  to { 
+    transform: translateY(0); 
+    opacity: 1; 
+  }
 }
 
 .modal-header {
@@ -363,25 +375,74 @@ const confirmLogout = () => {
   box-shadow: 0 4px 12px rgba(220, 38, 38, 0.2);
 }
 
+/* ============================================ */
+/* RESPONSIVE */
+/* ============================================ */
 @media (max-width: 1024px) {
   .header-content {
     flex-direction: column;
     gap: 1rem;
     align-items: stretch;
+    padding: 1rem;
   }
   
   .main-nav {
     width: 100%;
-    justify-content: center;
+    justify-content: flex-start;
+    overflow-x: auto;
   }
 
   .header-actions {
     width: 100%;
-    justify-content: center;
+    justify-content: stretch;
   }
 
   .logout-btn {
     width: 100%;
+    justify-content: center;
+  }
+
+  .content-wrapper {
+    padding: 1rem;
+  }
+
+  .app-footer {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .header-content {
+    padding: 0.875rem;
+  }
+
+  .nav-item {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+  }
+
+  .content-wrapper {
+    padding: 0.875rem;
+  }
+
+  .app-footer {
+    padding: 0.875rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo h1 {
+    font-size: 1.125rem;
+  }
+
+  .nav-item {
+    padding: 0.5rem 0.625rem;
+    font-size: 0.8125rem;
+  }
+
+  .logout-btn {
+    padding: 0.5rem 0.875rem;
+    font-size: 0.875rem;
   }
 }
 </style>

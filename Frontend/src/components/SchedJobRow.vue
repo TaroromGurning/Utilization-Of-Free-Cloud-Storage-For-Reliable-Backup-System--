@@ -1,24 +1,43 @@
 <template>
-  <tr>
-    <td class="truncate" :title="job.job_name"><strong>{{ job.job_name }}</strong></td>
-    <td class="truncate" :title="job.source_path">{{ job.source_path }}</td>
-    <td class="truncate" :title="job.gdrive_target">{{ job.gdrive_target }}</td>
-    <td>{{ job.last_run || 'N/A' }}</td>
+  <tr class="job-row" :class="getRowClass(job.status)">
+    <td>
+      <div class="job-name">
+        <strong>{{ job.job_name }}</strong>
+      </div>
+    </td>
+    
+    <td>
+      <div class="source-path" :title="job.source_path">
+        {{ job.source_path }}
+      </div>
+    </td>
+    
+    <td>
+      <span class="remote-badge">
+        {{ job.gdrive_target }}
+      </span>
+    </td>
+    
+    <td>
+      <span class="timestamp">{{ job.last_run || 'N/A' }}</span>
+    </td>
 
     <td>
-      <span class="status" :class="job.status.toLowerCase()">
-        {{ job.status }}
+      <span class="status-badge" :class="getStatusBadgeClass(job.status)">
+        {{ job.status || 'PENDING' }}
       </span>
     </td>
 
-    <td>{{ job.next_run || 'N/A' }}</td>
+    <td>
+      <span class="timestamp">{{ job.next_run || 'N/A' }}</span>
+    </td>
     
-    <td class="job-actions-col"> 
+    <td class="actions-cell">
       <div class="actions">
         <!-- Run/Trigger Button -->
         <button 
           @click="$emit('trigger', job.id)" 
-          class="action-btn trigger" 
+          class="action-btn trigger-btn" 
           title="Run Job Now"
         >
           ▶
@@ -27,7 +46,7 @@
         <!-- Edit Button -->
         <button 
           @click="$emit('edit', job.id)" 
-          class="action-btn edit" 
+          class="action-btn edit-btn" 
           title="Edit Job"
         >
           ✎
@@ -36,7 +55,7 @@
         <!-- View Script Button -->
         <button 
           @click="$emit('view-script', job.id)" 
-          class="action-btn view" 
+          class="action-btn view-btn" 
           title="View Script"
         >
           (i)
@@ -45,7 +64,7 @@
         <!-- Delete Button -->
         <button 
           @click="handleDelete" 
-          class="action-btn delete" 
+          class="action-btn delete-btn" 
           title="Delete Job"
         >
           ✕
@@ -63,153 +82,321 @@ const props = defineProps({
   }
 });
 
-const emit = defineEmits(['trigger', 'view-script', 'edit', 'delete']); 
+const emit = defineEmits(['trigger', 'view-script', 'edit', 'delete']);
 
 function handleDelete() {
-  if (confirm(`PERINGATAN! Menghapus Job Terjadwal '${props.job.job_name}' juga akan menghapus jadwal CRON.\nApakah Anda yakin ingin menghapus job ini?`)) {
-    emit('delete', props.job.id, props.job.job_name);
+  if (!confirm(`PERINGATAN! Menghapus Job Terjadwal '${props.job.job_name}' juga akan menghapus jadwal CRON.\nApakah Anda yakin ingin menghapus job ini?`)) {
+    return;
   }
+  emit('delete', props.job.id, props.job.job_name);
+}
+
+function getRowClass(status) {
+  if (!status) return '';
+  const s = status.toUpperCase();
+  if (['COMPLETED', 'SUCCESS'].includes(s)) return 'row-success';
+  if (s.includes('FAIL') || s === 'ERROR') return 'row-failed';
+  if (s === 'RUNNING') return 'row-running';
+  return '';
+}
+
+function getStatusBadgeClass(status) {
+  if (!status) return 'badge-pending';
+  const s = status.toUpperCase();
+  if (['COMPLETED', 'SUCCESS'].includes(s)) return 'badge-success';
+  if (s.includes('FAIL') || s === 'ERROR') return 'badge-failed';
+  if (s === 'RUNNING') return 'badge-running';
+  if (s === 'PENDING') return 'badge-pending';
+  return 'badge-default';
 }
 </script>
 
 <style scoped>
-/* --- STATUS BADGE --- */
-.status {
+/* ============================================ */
+/* TABLE ROW */
+/* ============================================ */
+.job-row {
+  border-bottom: 1px solid #f0f0f0;
+  transition: all 0.15s;
+  cursor: default;
+}
+
+.job-row:hover {
+  background: #fafafa;
+}
+
+.job-row.row-success {
+  border-left: 3px solid #22c55e;
+}
+
+.job-row.row-failed {
+  border-left: 3px solid #ef4444;
+}
+
+.job-row.row-running {
+  border-left: 3px solid #f59e0b;
+}
+
+/* ============================================ */
+/* TABLE CELLS */
+/* ============================================ */
+td {
+  padding: 1rem;
+  vertical-align: middle;
+  font-size: 0.9375rem;
+  color: #333;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+/* ============================================ */
+/* JOB NAME */
+/* ============================================ */
+.job-name strong {
+  font-weight: 500;
+  color: #1a1a1a;
+}
+
+/* ============================================ */
+/* SOURCE PATH */
+/* ============================================ */
+.source-path {
+  color: #666;
+  font-family: monospace;
+  font-size: 0.8125rem;
+  max-width: 250px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ============================================ */
+/* REMOTE BADGE */
+/* ============================================ */
+.remote-badge {
+  background: #eff6ff;
+  color: #1e40af;
+  padding: 0.25rem 0.625rem;
+  border-radius: 4px;
+  font-size: 0.8125rem;
+  font-weight: 500;
   display: inline-block;
-  padding: 3px 8px;
+}
+
+/* ============================================ */
+/* TIMESTAMP */
+/* ============================================ */
+.timestamp {
+  color: #666;
+  font-size: 0.875rem;
+  font-family: monospace;
+}
+
+/* ============================================ */
+/* STATUS BADGE */
+/* ============================================ */
+.status-badge {
+  padding: 0.375rem 0.75rem;
   border-radius: 4px;
   font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
-  color: white;
-}
-
-.status.pending {
-  background-color: #7f8c8d;
-}
-
-.status.running {
-  background-color: #3498db;
-}
-
-.status.completed,
-.status.success {
-  background-color: #27ae60;
-}
-
-.status.failed,
-.status.fail_source_check, 
-.status.fail_pre_script, 
-.status.fail_rclone,
-.status.fail_post_script {
-  background-color: #e74c3c;
-}
-
-/* --- TABLE CELL --- */
-td {
-  padding: 1rem;
-  vertical-align: middle;
-  border-bottom: 1px solid #f0f0f0;
-  font-size: 0.9375rem;
-  color: #333;
-}
-
-strong {
-  color: #1a1a1a;
-}
-
-/* --- TRUNCATE DENGAN ELLIPSIS --- */
-.truncate {
-  max-width: 220px;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  display: inline-block;
   white-space: nowrap;
-  cursor: help;
 }
 
-/* --- TOOLTIP SAAT HOVER --- */
-.truncate:hover::after {
-  content: attr(title);
-  position: absolute;
-  background: #333;
-  color: white;
-  padding: 8px 12px;
-  border-radius: 4px;
-  font-size: 0.8rem;
-  z-index: 1000;
-  white-space: normal;
-  max-width: 400px;
-  word-wrap: break-word;
-  margin-top: 5px;
-  margin-left: -50px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  font-weight: normal;
+.badge-success {
+  background: #d1fae5;
+  color: #065f46;
 }
 
-/* --- ACTIONS COLUMN --- */
-.job-actions-col {
+.badge-failed {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.badge-running {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.badge-pending {
+  background: #f3f4f6;
+  color: #6b7280;
+}
+
+.badge-default {
+  background: #f3f4f6;
+  color: #374151;
+}
+
+/* ============================================ */
+/* ACTIONS CELL */
+/* ============================================ */
+.actions-cell {
   width: auto;
   text-align: center;
+  padding: 0.5rem;
 }
 
 .actions {
   display: flex;
   justify-content: center;
-  gap: 8px;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-/* Action Buttons */
+/* ============================================ */
+/* ACTION BUTTONS */
+/* ============================================ */
 .action-btn {
-  border: none;
-  background: none;
+  background: white;
+  border: 1px solid #e5e5e5;
+  border-radius: 4px;
+  padding: 0.375rem 0.5rem;
   cursor: pointer;
-  padding: 6px;
-  font-size: 1.15rem;
-  transition: transform 0.15s ease, opacity 0.2s ease;
+  font-size: 0.875rem;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  height: 32px;
+  line-height: 1;
 }
 
 .action-btn:hover {
-  opacity: 0.85;
-  transform: scale(1.15);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .action-btn:active {
-  transform: scale(0.95);
+  transform: translateY(0);
 }
 
-/* Button Colors */
-.action-btn.trigger {
-  color: #27ae60;
+/* Button Variants */
+.trigger-btn {
+  color: #22c55e;
+  border-color: #22c55e;
 }
 
-.action-btn.edit {
-  color: #f39c12;
+.trigger-btn:hover {
+  background: #f0fdf4;
+  border-color: #16a34a;
+  color: #16a34a;
 }
 
-.action-btn.view {
-  color: #3498db;
+.edit-btn {
+  color: #f59e0b;
+  border-color: #f59e0b;
 }
 
-.action-btn.delete {
-  color: #e74c3c;
+.edit-btn:hover {
+  background: #fffbeb;
+  border-color: #d97706;
+  color: #d97706;
+}
+
+.view-btn {
+  color: #3b82f6;
+  border-color: #3b82f6;
+}
+
+.view-btn:hover {
+  background: #eff6ff;
+  border-color: #2563eb;
+  color: #2563eb;
+}
+
+.delete-btn {
+  color: #ef4444;
+  border-color: #ef4444;
+}
+
+.delete-btn:hover {
+  background: #fef2f2;
+  border-color: #dc2626;
+  color: #dc2626;
+}
+
+/* ============================================ */
+/* RESPONSIVE */
+/* ============================================ */
+@media (max-width: 1024px) {
+  td {
+    padding: 0.75rem;
+    font-size: 0.8125rem;
+  }
+
+  .source-path {
+    max-width: 180px;
+  }
+
+  .actions {
+    gap: 0.375rem;
+  }
+
+  .action-btn {
+    padding: 0.25rem 0.375rem;
+    min-width: 28px;
+    height: 28px;
+    font-size: 0.8125rem;
+  }
 }
 
 @media (max-width: 768px) {
-  .actions {
-    gap: 4px;
-  }
-  
-  .action-btn {
-    font-size: 1rem;
-    padding: 4px;
+  td {
+    padding: 0.625rem 0.5rem;
   }
 
-  .truncate {
+  .source-path {
+    max-width: 120px;
+    font-size: 0.75rem;
+  }
+
+  .remote-badge {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+  }
+
+  .status-badge {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.7rem;
+  }
+
+  .timestamp {
+    font-size: 0.75rem;
+  }
+
+  .actions {
+    gap: 0.25rem;
+    flex-wrap: wrap;
+  }
+
+  .action-btn {
+    padding: 0.25rem;
+    min-width: 26px;
+    height: 26px;
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .job-name {
+    font-size: 0.8125rem;
+  }
+
+  .source-path {
     max-width: 100px;
   }
 
-  .truncate:hover::after {
-    max-width: 200px;
+  .actions {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .action-btn {
+    width: 100%;
+    justify-content: center;
   }
 }
 </style>

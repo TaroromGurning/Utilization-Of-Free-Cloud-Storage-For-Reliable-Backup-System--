@@ -1,44 +1,38 @@
 <template>
-    <tr>
-        <!-- ✅ UPDATED: Remote Name Column - Clickable untuk browse -->
+    <tr class="remote-row" :class="getRowClass(remote.status_connect)">
+        <!-- Remote Name Column - Clickable untuk browse -->
         <td>
-            <div class="remote-name-wrapper">
-                <button 
-                    @click="openFileBrowser" 
-                    class="remote-name-btn"
-                    :title="`Browse files in ${remote.remote_name}`"
-                >
-                    <span class="drive-icon"></span>
-                    <strong>{{ remote.remote_name }}</strong>
-                </button>
-            </div>
+            <button 
+                @click="openFileBrowser" 
+                class="remote-name-btn"
+                :title="`Browse files in ${remote.remote_name}`"
+            >
+                {{ remote.remote_name }}
+            </button>
             <div v-if="remote.system_message" class="warning">
                 {{ remote.system_message }}
             </div>
         </td>
         
-        <!-- ✅ UNCHANGED: Email Column with Truncation and Tooltip -->
+        <!-- Email Column with Truncation and Tooltip -->
         <td>
-            <div v-if="remote.email" class="email-cell" :title="remote.email">
-                <span class="email-icon">📧</span>
-                <span class="email-text">{{ truncatedEmail }}</span>
-            </div>
-            <div v-else class="email-cell">
-                <span class="email-placeholder">No email</span>
-            </div>
+            <span v-if="remote.email" class="email-text" :title="remote.email">
+                {{ truncatedEmail }}
+            </span>
+            <span v-else class="email-placeholder">No email</span>
         </td>
         
-        <!-- ✅ UNCHANGED: Status Column -->
+        <!-- Status Column -->
         <td>
-            <span class="status" :class="getStatusClass(remote.status_connect)">
-                {{ remote.status_connect }}
+            <span class="status-badge" :class="getStatusClass(remote.status_connect)">
+                {{ remote.status_connect || 'PENDING' }}
             </span>
         </td>
 
-        <!-- ✅ UNCHANGED: Storage Column -->
+        <!-- Storage Column -->
         <td>
             <div class="storage-info">
-                <span>{{ usedFormatted }} / {{ totalFormatted }} GB</span>
+                <span class="storage-text">{{ usedFormatted }} / {{ totalFormatted }} GB</span>
                 <div class="storage-row">
                     <div class="storage-bar">
                         <div 
@@ -51,14 +45,16 @@
             </div>
         </td>
         
-        <!-- ✅ UNCHANGED: Active Jobs Column -->
-        <td class="center">{{ remote.active_job_count }}</td>
+        <!-- Active Jobs Column -->
+        <td class="center-text">{{ remote.active_job_count }}</td>
         
-        <!-- ✅ UNCHANGED: Last Checked Column -->
-        <td class="text-muted">{{ formatLastChecked(remote.last_checked_at) }}</td>
+        <!-- Last Checked Column -->
+        <td>
+            <span class="timestamp">{{ formatLastChecked(remote.last_checked_at) }}</span>
+        </td>
     </tr>
 
-    <!-- ✅ NEW: File Browser Modal -->
+    <!-- File Browser Modal -->
     <FileBrowserModal
         :isVisible="showFileBrowser"
         :remoteName="remote.remote_name"
@@ -78,21 +74,21 @@ const props = defineProps({
     }
 });
 
-// ✅ NEW: State untuk File Browser Modal
+// State untuk File Browser Modal
 const showFileBrowser = ref(false);
 
-// ✅ NEW: Function untuk open file browser
+// Function untuk open file browser
 function openFileBrowser() {
     showFileBrowser.value = true;
 }
 
-// ✅ NEW: Function untuk handle file selection (optional)
+// Function untuk handle file selection
 function handleFileSelect(fileData) {
     console.log('File selected:', fileData);
     // Bisa tambah logic lain jika diperlukan
 }
 
-// ✅ UNCHANGED: Existing computed properties
+// Computed properties
 const used = computed(() => props.remote.used_storage_gb || 0);
 const total = computed(() => props.remote.total_storage_gb || 0);
 
@@ -108,7 +104,7 @@ const usedFormatted = computed(() => {
 
 const totalFormatted = computed(() => total.value.toFixed(2));
 
-// ✅ UNCHANGED: Truncate email for display
+// Truncate email for display
 const truncatedEmail = computed(() => {
     const email = props.remote.email || '';
     const maxLength = 25;
@@ -132,13 +128,26 @@ const truncatedEmail = computed(() => {
     return email;
 });
 
-// ✅ UNCHANGED: Helper function for status class
-function getStatusClass(status) {
-    if (!status) return 'pending';
-    return status.toLowerCase();
+// Helper function for row class based on status
+function getRowClass(status) {
+    if (!status) return '';
+    const s = status.toUpperCase();
+    if (s === 'CONNECTED') return 'row-connected';
+    if (s === 'DISCONNECTED') return 'row-disconnected';
+    return '';
 }
 
-// ✅ UNCHANGED: Format date function
+// Helper function for status class
+function getStatusClass(status) {
+    if (!status) return 'badge-pending';
+    const s = status.toUpperCase();
+    if (s === 'CONNECTED') return 'badge-connected';
+    if (s === 'DISCONNECTED') return 'badge-disconnected';
+    if (s === 'PENDING') return 'badge-pending';
+    return 'badge-default';
+}
+
+// Format date function
 function formatLastChecked(isoDate) {
     if (!isoDate) return 'N/A';
     try {
@@ -157,125 +166,130 @@ function formatLastChecked(isoDate) {
 </script>
 
 <style scoped>
-/* ✅ NEW: Remote Name Button Styles */
+/* ============================================ */
+/* TABLE ROW */
+/* ============================================ */
+.remote-row {
+    border-bottom: 1px solid #f0f0f0;
+    transition: all 0.15s;
+    cursor: default;
+}
+
+.remote-row:hover {
+    background: #fafafa;
+}
+
+.remote-row.row-connected {
+    border-left: 3px solid #22c55e;
+}
+
+.remote-row.row-disconnected {
+    border-left: 3px solid #ef4444;
+}
+
+/* ============================================ */
+/* TABLE CELLS */
+/* ============================================ */
+td {
+    padding: 1rem;
+    vertical-align: middle;
+    font-size: 0.9375rem;
+    color: #333;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+/* ============================================ */
+/* REMOTE NAME BUTTON - Minimal */
+/* ============================================ */
 .remote-name-btn {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
     background: none;
     border: none;
-    padding: 0.5rem 0.75rem;
+    padding: 0;
     cursor: pointer;
-    border-radius: 6px;
-    transition: all 0.2s ease;
-    font-size: 0.90rem;
-    margin: -0.5rem 0;
-}
-
-
-.remote-name-btn:active {
-    transform: translateX(2px);
-}
-
-.drive-icon {
-    font-size: 1.25rem;
-    flex-shrink: 0;
-}
-
-.remote-name-btn strong {
-    color: #3498db;
-    font-weight: 600;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: #3b82f6;
     text-decoration: underline;
     text-decoration-style: dotted;
     text-underline-offset: 3px;
-    transition: color 0.2s ease;
+    transition: color 0.2s;
 }
 
-.remote-name-btn:hover strong {
-    color: #2980b9;
+.remote-name-btn:hover {
+    color: #2563eb;
 }
 
-/* ✅ UPDATED: Simplified remote name wrapper */
-.remote-name-wrapper {
-    display: inline-block;
-}
-
-/* ✅ REMOVED: Old .remote-icon styles (diganti dengan button) */
-
-/* ✅ UNCHANGED: Email cell styles */
-.email-cell {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.85rem;
-    max-width: 200px;
-    cursor: help;
-}
-
-.email-icon {
-    font-size: 0.9rem;
-    flex-shrink: 0;
-}
-
+/* ============================================ */
+/* EMAIL CELL - Minimal */
+/* ============================================ */
 .email-text {
-    color: #2c3e50;
-    font-weight: 500;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    transition: color 0.2s ease;
-}
-
-.email-cell:hover .email-text {
-    color: #3498db;
+    color: #666;
+    font-family: monospace;
+    font-size: 0.875rem;
 }
 
 .email-placeholder {
-    color: #95a5a6;
+    color: #999;
     font-style: italic;
-    font-size: 0.8rem;
+    font-size: 0.875rem;
 }
 
-/* ✅ UNCHANGED: Status styles */
-.status {
-    display: inline-block;
-    padding: 3px 8px;
+/* ============================================ */
+/* STATUS BADGE - Same as ManualJobRow */
+/* ============================================ */
+.status-badge {
+    padding: 0.375rem 0.75rem;
     border-radius: 4px;
     font-size: 0.75rem;
     font-weight: 600;
     text-transform: uppercase;
-    color: white;
+    display: inline-block;
+    white-space: nowrap;
 }
 
-.status.connected {
-    background-color: #27ae60;
+.badge-connected {
+    background: #d1fae5;
+    color: #065f46;
 }
 
-.status.disconnected {
-    background-color: #e74c3c;
+.badge-disconnected {
+    background: #fee2e2;
+    color: #991b1b;
 }
 
-.status.pending {
-    background-color: #f39c12;
+.badge-pending {
+    background: #fef3c7;
+    color: #92400e;
 }
 
-/* ✅ UNCHANGED: Warning styles */
+.badge-default {
+    background: #f3f4f6;
+    color: #374151;
+}
+
+/* ============================================ */
+/* WARNING MESSAGE */
+/* ============================================ */
 .warning {
     font-size: 0.75rem;
-    color: #ff0000;
-    margin-top: 0.25rem;
+    color: #ef4444;
+    margin-top: 0.375rem;
+    font-weight: 500;
 }
 
-/* ✅ UNCHANGED: Storage info styles */
+/* ============================================ */
+/* STORAGE INFO */
+/* ============================================ */
 .storage-info {
     display: flex;
     flex-direction: column;
-    gap: 0.4rem;
+    gap: 0.375rem;
 }
 
-.storage-info > span:first-child {
-    font-size: 0.73rem;
+.storage-text {
+    font-size: 0.8125rem;
     font-weight: 500;
+    color: #1a1a1a;
 }
 
 .storage-row {
@@ -286,53 +300,102 @@ function formatLastChecked(isoDate) {
 
 .storage-bar {
     width: 150px;
-    height: 4px;
-    background-color: #ecf0f1;
-    border-radius: 2px;
+    height: 6px;
+    background-color: #f0f0f0;
+    border-radius: 3px;
     overflow: hidden;
 }
 
 .bar-fill {
     height: 100%;
-    background-color: #3498db;
+    background: linear-gradient(90deg, #22c55e 0%, #16a34a 100%);
     transition: width 0.3s ease;
 }
 
 .percentage {
     font-size: 0.75rem;
-    color: #7f8c8d;
-    font-weight: 500;
-    min-width: 2rem;
+    color: #666;
+    font-weight: 600;
+    min-width: 2.5rem;
+    font-family: monospace;
 }
 
-/* ✅ UNCHANGED: Table cell styles */
-.center {
+/* ============================================ */
+/* JOB COUNT - Minimal */
+/* ============================================ */
+.center-text {
     text-align: center;
+    font-weight: 600;
+    color: #1a1a1a;
 }
 
-.text-muted {
-    color: #95a5a6;
-    font-size: 0.85rem;
+/* ============================================ */
+/* TIMESTAMP */
+/* ============================================ */
+.timestamp {
+    color: #666;
+    font-size: 0.875rem;
+    font-family: monospace;
 }
 
-td {
-    padding: 0.75rem;
-    vertical-align: middle;
-}
+/* ============================================ */
+/* RESPONSIVE */
+/* ============================================ */
+@media (max-width: 1024px) {
+    td {
+        padding: 0.75rem;
+        font-size: 0.8125rem;
+    }
 
-/* ✅ NEW: Responsive styles */
-@media (max-width: 768px) {
     .remote-name-btn {
-        font-size: 0.85rem;
-        padding: 0.4rem 0.6rem;
+        font-size: 0.8125rem;
+        padding: 0.25rem 0.5rem;
     }
-    
-    .drive-icon {
-        font-size: 1rem;
-    }
-    
+
     .email-cell {
-        max-width: 150px;
+        max-width: 180px;
+    }
+
+    .storage-bar {
+        width: 120px;
+    }
+}
+
+@media (max-width: 768px) {
+    td {
+        padding: 0.625rem 0.5rem;
+    }
+
+    .remote-name-btn {
+        font-size: 0.875rem;
+    }
+
+    .email-text {
+        font-size: 0.75rem;
+    }
+
+    .storage-text {
+        font-size: 0.75rem;
+    }
+
+    .storage-bar {
+        width: 100px;
+        height: 4px;
+    }
+
+    .status-badge {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.7rem;
+    }
+
+    .timestamp {
+        font-size: 0.75rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .storage-bar {
+        width: 80px;
     }
 }
 </style>

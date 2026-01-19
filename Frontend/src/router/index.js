@@ -13,6 +13,7 @@ import Logs from '@/views/Logs.vue';
 import ManualJobs from '@/views/ManualJobs.vue';
 import Remotes from '@/views/Remotes.vue';
 import ScheduledJobs from '@/views/ScheduledJobs.vue';
+import History from '../views/History.vue';
 
 // ============================================
 // ROUTE CONFIGURATION
@@ -109,6 +110,12 @@ const routes = [
                     title: 'Logs - G-Backup',
                     icon: '📝'
                 }
+            },
+
+            {
+                path: 'history',
+                name: 'History',
+                component: History,
             }
         ]
     },

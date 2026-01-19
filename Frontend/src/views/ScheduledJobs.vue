@@ -15,11 +15,11 @@
       @close="closeModal"
     />
 
-    <!-- ✅ Edit Job Modal -->
+    <!-- Edit Job Modal -->
     <EditJobModal
       :isVisible="showEditModal"
       :jobData="selectedJob"
-      @close="showEditModal = false"
+      @close="closeEditModal"
       @success="handleUpdateSuccess"
     />
 
@@ -71,7 +71,7 @@
       </table>
     </div>
 
-    <!-- ✅ Toast Notification -->
+    <!-- Toast Notification -->
     <Transition name="toast">
       <div
         v-if="toast.show"
@@ -113,18 +113,18 @@ const isModalVisible = ref(false);
 const currentScript = ref('');
 const currentJobId = ref(null);
 
-// ✅ State untuk Edit Modal
+// State untuk Edit Modal
 const selectedJob = ref(null);
 const showEditModal = ref(false);
 
-// ✅ Toast notification state
+// Toast notification state
 const toast = ref({
   show: false,
   message: '',
   type: 'success', // 'success' | 'error' | 'info'
 });
 
-// ✅ Fetch scheduled jobs
+// Fetch scheduled jobs
 async function fetchData() {
   isLoading.value = true;
   errorMessage.value = null;
@@ -141,7 +141,7 @@ async function fetchData() {
   }
 }
 
-// ✅ Handle Edit - Load job data terlebih dahulu
+// Handle Edit - Load job data terlebih dahulu
 async function handleEdit(jobId) {
   console.log('✅ handleEdit dipanggil dengan jobId:', jobId);
   
@@ -153,7 +153,7 @@ async function handleEdit(jobId) {
     const response = await jobService.getJobById(jobId);
     console.log('✅ Full response from API:', response);
     
-    // ✅ Tidak perlu extract data di sini, biarkan EditJobModal yang handle
+    // Tidak perlu extract data di sini, biarkan EditJobModal yang handle
     // EditJobModal akan menerima full response dan extract sendiri
     selectedJob.value = response;
     showEditModal.value = true;
@@ -165,14 +165,21 @@ async function handleEdit(jobId) {
   }
 }
 
-// ✅ Handle Update Success
+// Handle Update Success
 function handleUpdateSuccess() {
   console.log('✅ Job berhasil diupdate');
-  fetchData(); // Refresh job list
+  closeEditModal(); // Langsung tutup modal
   showToast('Job berhasil diperbarui!', 'success');
+  fetchData(); // Refresh job list
 }
 
-// ✅ Handle Trigger Job
+// Close Edit Modal
+function closeEditModal() {
+  showEditModal.value = false;
+  selectedJob.value = null;
+}
+
+// Handle Trigger Job
 async function handleTrigger(jobId) {
   if (!confirm(`Apakah Anda yakin ingin menjalankan job ID ${jobId} sekarang?`)) {
     return;
@@ -192,7 +199,7 @@ async function handleTrigger(jobId) {
   }
 }
 
-// ✅ Handle View Script
+// Handle View Script
 async function handleViewScript(jobId) {
   try {
     isModalVisible.value = true;
@@ -208,7 +215,7 @@ async function handleViewScript(jobId) {
   }
 }
 
-// ✅ Handle Delete Job
+// Handle Delete Job
 async function handleDeleteJob(jobId, jobName) {
   if (!confirm(`Apakah Anda yakin ingin menghapus job "${jobName}"?`)) {
     return;
@@ -231,7 +238,7 @@ function closeModal() {
   currentJobId.value = null;
 }
 
-// ✅ Toast Notification Helper
+// Toast Notification Helper
 function showToast(message, type = 'success') {
   toast.value = { show: true, message, type };
   setTimeout(() => {
@@ -239,7 +246,7 @@ function showToast(message, type = 'success') {
   }, 3000);
 }
 
-// ✅ Get toast CSS class
+// Get toast CSS class
 function getToastClass(type) {
   const classes = {
     success: 'toast-success',

@@ -337,24 +337,6 @@
         </div>
        </div>
       </div>
-
-      <!-- Install Info -->
-      <div class="install-info">
-       <h4>Belum punya rclone?</h4>
-       <div class="install-commands">
-        <div class="install-item">
-         <strong>Linux/Mac:</strong>
-         <div class="command-box">
-          <code>curl https://rclone.org/install.sh | sudo bash</code>
-          <button @click="copyToClipboard('curl https://rclone.org/install.sh | sudo bash')" class="btn-copy">Copy</button>
-         </div>
-        </div>
-        <div class="install-item">
-         <strong>Windows:</strong>
-         <a href="https://rclone.org/downloads/" target="_blank" class="link">Download dari rclone.org</a>
-        </div>
-       </div>
-      </div>
      </div>
     </div>
    </div>

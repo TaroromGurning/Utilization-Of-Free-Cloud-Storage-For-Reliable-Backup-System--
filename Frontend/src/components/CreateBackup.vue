@@ -37,9 +37,23 @@
             </select>
           </div>
 
-          <div class="form-group">
+          <div class="form-group" :class="{ 'has-error': destinationPathError }">
             <label for="backup-dest">Destination Path (Cloud) *</label>
-            <input type="text" id="backup-dest" v-model="backupForm.destination_path" required placeholder="/backups/database/" />
+            <input 
+              type="text" 
+              id="backup-dest" 
+              v-model="backupForm.destination_path" 
+              @input="validateDestinationPath"
+              required 
+              placeholder="/backups/database/" 
+              :class="{ 'input-error': destinationPathError }"
+            />
+            <small v-if="destinationPathError" class="error-message">
+              {{ destinationPathError }}
+            </small>
+            <small v-else class="hint">
+              Format: /folder/subfolder/ (gunakan forward slash, tanpa spasi atau karakter khusus)
+            </small>
           </div>
 
           <div class="form-group" :class="{ 'disabled-group': backupForm.rclone_mode === 'sync' }">
@@ -156,7 +170,7 @@ rm /tmp/backup.sql.gz"></textarea>
 
           <div class="form-actions">
             <button type="button" @click="resetForm" class="btn-secondary">Reset</button>
-            <button type="submit" :disabled="isLoading" class="btn-submit">
+            <button type="submit" :disabled="isLoading || destinationPathError" class="btn-submit">
               <span v-if="isLoading">Processing...</span>
               <span v-else>{{ isScheduled ? 'Create Scheduled Job' : 'Create & Run Manual Job' }}</span>
             </button>
@@ -185,6 +199,7 @@ const emit = defineEmits(['close','success'])
 const isLoading = ref(false)
 const message = ref(null)
 const errorMessage = ref(null)
+const destinationPathError = ref(null)
 
 const isScheduled = ref(false)
 const scheduleType = ref('daily')
@@ -208,7 +223,7 @@ const weekdays = [
 
 const backupForm = ref({
   job_name: '',
-  rclone_mode: 'copy', // Default Copy
+  rclone_mode: 'copy',
   source_path: '',
   remote_name: '',
   destination_path: '',
@@ -218,8 +233,43 @@ const backupForm = ref({
   max_retention: 10
 })
 
-// Watcher untuk Mode Sync
-// Jika mode berubah ke 'sync', kita set retention ke 0 atau nilai dummy karena tidak dipakai
+// ✅ Fungsi validasi Destination Path
+function validateDestinationPath() {
+  const path = backupForm.value.destination_path
+  
+  if (!path) {
+    destinationPathError.value = null
+    return
+  }
+
+  // Validasi spasi
+  if (path.includes(' ')) {
+    destinationPathError.value = 'Spasi tidak diperbolehkan. Gunakan underscore (_) atau dash (-)'
+    return
+  }
+
+  // Validasi colon
+  if (path.includes(':')) {
+    destinationPathError.value = 'Karakter ":" tidak diperbolehkan (conflict dengan format remote:path)'
+    return
+  }
+
+  // Validasi double quote
+  if (path.includes('"')) {
+    destinationPathError.value = 'Karakter kutip ganda (") tidak diperbolehkan'
+    return
+  }
+
+  // Validasi backslash
+  if (path.includes('\\')) {
+    destinationPathError.value = 'Gunakan forward slash (/) bukan backslash (\\)'
+    return
+  }
+
+  // Path valid
+  destinationPathError.value = null
+}
+
 watch(() => backupForm.value.rclone_mode, (newMode) => {
     if (newMode === 'sync') {
         // Optional: Reset retention atau biarkan saja disabled
@@ -286,7 +336,7 @@ function toggleWeekday(day){ const idx=scheduleConfig.value.weekdays.indexOf(day
 function resetForm(){
   backupForm.value={ 
       job_name:'', 
-      rclone_mode:'copy', // Reset ke copy
+      rclone_mode:'copy',
       source_path:'', 
       remote_name:'', 
       destination_path:'', 
@@ -297,9 +347,17 @@ function resetForm(){
   }
   isScheduled.value=false
   scheduleConfig.value={ hours:1,time:'00:00',weekdays:[],dayOfMonth:1,customCron:'' }
+  destinationPathError.value = null
 }
 
 async function handleBackupSubmit(){
+  // Validasi path sebelum submit
+  validateDestinationPath()
+  if (destinationPathError.value) {
+    errorMessage.value = 'Silakan perbaiki Destination Path sebelum melanjutkan'
+    return
+  }
+
   isLoading.value=true
   message.value=null
   errorMessage.value=null
@@ -331,7 +389,6 @@ watch(() => props.isVisible, (newVal) => {
 </script>
 
 <style scoped>
-/* ... CSS SEBELUMNYA TETAP ADA ... */
 .config-view { max-width: 900px; margin: 0 auto; }
 .modal-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(4px); display: flex; align-items: center; justify-content: center; z-index: 1000; padding: 20px; }
 .modal-content { background: #fff; border-radius: 8px; border: 1px solid #e5e5e5; width: 90%; max-width: 800px; max-height: 90vh; overflow-y: auto; position: relative; }
@@ -340,18 +397,17 @@ watch(() => props.isVisible, (newVal) => {
 .close-btn { background: transparent; border: 1px solid #e5e5e5; color: #666; width: 32px; height: 32px; border-radius: 4px; cursor: pointer; font-size: 1.5rem; line-height: 1; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
 .close-btn:hover { background: #f5f5f5; border-color: #1a1a1a; color: #1a1a1a; }
 
-/* Form Styles */
 .config-form { padding: 1.5rem; }
 .form-description { color: #666; margin: 0 0 1.5rem 0; font-size: 0.9375rem; }
 .form-group { margin-bottom: 1.25rem; }
+.form-group.has-error input { border-color: #ef4444; }
 .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 500; color: #1a1a1a; font-size: 0.875rem; }
 .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 0.625rem 0.875rem; border: 1px solid #e5e5e5; border-radius: 6px; font-size: 0.9375rem; transition: all 0.2s; box-sizing: border-box; }
 .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: #1a1a1a; }
+.input-error { border-color: #ef4444 !important; }
+.input-error:focus { border-color: #dc2626 !important; }
+.error-message { display: block; margin-top: 0.375rem; font-size: 0.8125rem; color: #ef4444; font-weight: 500; }
 
-/* ✅ NEW: Backup Mode Selector CSS */
-/* Container: Gunakan Flex agar item berjejer ke samping sesuai ukuran konten */
-/* Container: Posisikan tombol di tengah-tengah form */
-/* ✅ Disabled Group Style */
 .disabled-group {
   opacity: 0.6;
   pointer-events: none;
@@ -361,11 +417,10 @@ watch(() => props.isVisible, (newVal) => {
   color: #999;
 }
 .hint.warning {
-  color: #d97706; /* Orange warning */
+  color: #d97706;
   font-weight: 500;
 }
 
-/* ... Sisa CSS Schedule & Responsive tetap sama ... */
 .hint { display: block; margin-top: 0.375rem; font-size: 0.8125rem; color: #666; }
 .schedule-section { background: #fafafa; padding: 1rem; border-radius: 1px; margin-bottom: 1rem; border: 1px solid #000000; }
 .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; }
@@ -397,9 +452,10 @@ watch(() => props.isVisible, (newVal) => {
 .preview-description { color: #d4d4d4; font-size: 0.875rem; }
 .form-actions { display: flex; justify-content: flex-end; gap: 0.75rem; margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid #e5e5e5; }
 .btn-submit { background: #1a1a1a; color: white; padding: 0.625rem 1.5rem; border: none; border-radius: 6px; cursor: pointer; font-weight: 500; font-size: 0.9375rem; transition: all 0.2s; }
+.btn-submit:disabled { opacity: 0.5; cursor: not-allowed; }
 .btn-secondary { background: white; color: #666; border: 1px solid #e5e5e5; padding: 0.625rem 1.125rem; border-radius: 6px; cursor: pointer; font-weight: 500; font-size: 0.9375rem; }
 .message.success { background: #d1fae5; color: #065f46; border-left: 3px solid #22c55e; padding: 0.875rem 1rem; border-radius: 6px; margin-top: 1rem; }
 .message.error { background: #fee2e2; color: #991b1b; border-left: 3px solid #ef4444; padding: 0.875rem 1rem; border-radius: 6px; margin-top: 1rem; }
-/* Responsive */
+
 @media (max-width: 768px) { .modal-content { width: 95%; } .config-form { padding: 1rem; } .schedule-type-selector { grid-template-columns: repeat(auto-fit, minmax(70px, 1fr)); } .form-actions { flex-direction: column; } .btn-submit, .btn-secondary { width: 100%; } }
 </style>

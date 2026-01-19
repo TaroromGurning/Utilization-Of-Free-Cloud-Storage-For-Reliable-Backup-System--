@@ -37,9 +37,23 @@
             </select>
           </div>
 
-          <div class="form-group">
+          <div class="form-group" :class="{ 'has-error': destinationPathError }">
             <label for="backup-dest">Destination Path (Cloud) *</label>
-            <input type="text" id="backup-dest" v-model="backupForm.destination_path" required placeholder="/backups/database/" />
+            <input 
+              type="text" 
+              id="backup-dest" 
+              v-model="backupForm.destination_path" 
+              @input="validateDestinationPath"
+              required 
+              placeholder="/backups/database/" 
+              :class="{ 'input-error': destinationPathError }"
+            />
+            <small v-if="destinationPathError" class="error-message">
+              {{ destinationPathError }}
+            </small>
+            <small v-else class="hint">
+              Format: /folder/subfolder/ (gunakan forward slash, tanpa spasi atau karakter khusus)
+            </small>
           </div>
 
           <div class="form-group" :class="{ 'disabled-group': backupForm.rclone_mode === 'sync' }">
@@ -156,7 +170,7 @@ rm /tmp/backup.sql.gz"></textarea>
 
           <div class="form-actions">
             <button type="button" @click="close" class="btn-secondary">Cancel</button>
-            <button type="submit" :disabled="isLoading" class="btn-submit">
+            <button type="submit" :disabled="isLoading || destinationPathError" class="btn-submit">
               <span v-if="isLoading">Updating...</span>
               <span v-else>Update Job</span>
             </button>
@@ -185,28 +199,16 @@ const props = defineProps({
 })
 const emit = defineEmits(['close','success'])
 
-// ✅ Computed untuk mendapatkan job ID dari nested structure
 const jobId = computed(() => {
   if (!props.jobData) return null
-  // Backend returns: { success: true, data: { id, ... } }
   const actualData = props.jobData.data || props.jobData
   return actualData.id
 })
 
-const jobIdToSubmit = computed(() => {
-    // Cek format data yang dikirim Parent: { success: true, data: { id: X } }
-    const data = props.jobData && props.jobData.data ? props.jobData.data : props.jobData;
-    
-    // Prioritaskan ID dari prop (jika ada), jika tidak, ambil dari data object
-    const id = props.jobId || (data ? data.id : null);
-    
-    // Kembalikan sebagai Number, memastikan ID valid
-    return Number(id) || null;
-});
-
 const isLoading = ref(false)
 const message = ref(null)
 const errorMessage = ref(null)
+const destinationPathError = ref(null)
 
 const isScheduled = ref(false)
 const scheduleType = ref('daily')
@@ -259,7 +261,43 @@ async function fetchRemoteList() {
   }
 }
 
-// ✅ Function untuk parse cron expression yang lebih robust
+// ✅ Fungsi validasi Destination Path
+function validateDestinationPath() {
+  const path = backupForm.value.destination_path
+  
+  if (!path) {
+    destinationPathError.value = null
+    return
+  }
+
+  // Validasi spasi
+  if (path.includes(' ')) {
+    destinationPathError.value = 'Spasi tidak diperbolehkan. Gunakan underscore (_) atau dash (-)'
+    return
+  }
+
+  // Validasi colon
+  if (path.includes(':')) {
+    destinationPathError.value = 'Karakter ":" tidak diperbolehkan (conflict dengan format remote:path)'
+    return
+  }
+
+  // Validasi double quote
+  if (path.includes('"')) {
+    destinationPathError.value = 'Karakter kutip ganda (") tidak diperbolehkan'
+    return
+  }
+
+  // Validasi backslash
+  if (path.includes('\\')) {
+    destinationPathError.value = 'Gunakan forward slash (/) bukan backslash (\\)'
+    return
+  }
+
+  // Path valid
+  destinationPathError.value = null
+}
+
 function parseCronExpression(cron) {
   if (!cron || cron.trim() === '') {
     isScheduled.value = false
@@ -285,14 +323,12 @@ function parseCronExpression(cron) {
   
   const [minute, hour, dayOfMonth, month, dayOfWeek] = parts
   
-  // Hourly: 0 */N * * *
   if (hour.startsWith('*/') && dayOfMonth === '*' && month === '*' && dayOfWeek === '*') {
     scheduleType.value = 'hourly'
     scheduleConfig.value.hours = parseInt(hour.replace('*/', '')) || 1
     return
   }
   
-  // Daily: M H * * *
   if (dayOfMonth === '*' && month === '*' && dayOfWeek === '*' && !hour.includes('*') && !minute.includes('*')) {
     scheduleType.value = 'daily'
     const h = hour.padStart(2, '0')
@@ -301,7 +337,6 @@ function parseCronExpression(cron) {
     return
   }
   
-  // Weekly: M H * * D,D,D
   if (dayOfMonth === '*' && month === '*' && dayOfWeek !== '*' && !hour.includes('*') && !minute.includes('*')) {
     scheduleType.value = 'weekly'
     const h = hour.padStart(2, '0')
@@ -311,7 +346,6 @@ function parseCronExpression(cron) {
     return
   }
   
-  // Monthly: M H D * *
   if (month === '*' && dayOfWeek === '*' && dayOfMonth !== '*' && !hour.includes('*') && !minute.includes('*')) {
     scheduleType.value = 'monthly'
     const h = hour.padStart(2, '0')
@@ -321,29 +355,18 @@ function parseCronExpression(cron) {
     return
   }
   
-  // Fallback to custom
   scheduleType.value = 'custom'
   scheduleConfig.value.customCron = cron
 }
 
-// ✅ Function untuk populate form dengan data yang ada
 function populateForm(jobData) {
   if (!jobData) {
     console.warn('No job data provided to populateForm')
     return
   }
   
-  console.log('=== POPULATE FORM ===')
-  console.log('Raw jobData received:', jobData)
-  
-  // ✅ Handle nested data structure dari backend
-  // Backend returns: { success: true, data: { id, job_name, ... } }
   const actualData = jobData.data || jobData
   
-  console.log('Actual data to populate:', actualData)
-  console.log('Available fields:', Object.keys(actualData))
-  
-  // ✅ Populate basic fields sesuai dengan response backend
   backupForm.value = {
     job_name: actualData.job_name || '',
     rclone_mode: actualData.rclone_mode || 'copy',
@@ -356,27 +379,12 @@ function populateForm(jobData) {
     max_retention: actualData.max_retention || 10
   }
   
-  console.log('✅ Form values populated:', {
-    job_name: backupForm.value.job_name,
-    source_path: backupForm.value.source_path,
-    remote_name: backupForm.value.remote_name,
-    destination_path: backupForm.value.destination_path,
-    schedule_cron: backupForm.value.schedule_cron,
-    max_retention: backupForm.value.max_retention,
-    rclone_mode: backupForm.value.rclone_mode
-  })
-  
-  // ✅ Parse dan set schedule configuration
   parseCronExpression(actualData.schedule_cron || '')
   
-  console.log('✅ Schedule parsed:', {
-    isScheduled: isScheduled.value,
-    scheduleType: scheduleType.value,
-    scheduleConfig: scheduleConfig.value
-  })
+  // ✅ Validasi path saat populate
+  validateDestinationPath()
 }
 
-// ✅ Computed untuk generate cron expression
 const generatedCron = computed(() => {
   if (!isScheduled.value) return ''
   
@@ -441,14 +449,12 @@ const cronDescription = computed(() => {
   }
 })
 
-// ✅ Watch untuk sync cron expression
 watch(generatedCron, (newCron) => {
   if (isScheduled.value) {
     backupForm.value.schedule_cron = newCron
   }
 })
 
-// ✅ Watch untuk mode sync
 watch(() => backupForm.value.rclone_mode, (newMode) => {
   if (newMode === 'sync') {
     backupForm.value.max_retention = null
@@ -477,6 +483,13 @@ function toggleWeekday(day) {
 }
 
 async function handleBackupSubmit() {
+  // Validasi path sebelum submit
+  validateDestinationPath()
+  if (destinationPathError.value) {
+    errorMessage.value = 'Silakan perbaiki Destination Path sebelum melanjutkan'
+    return
+  }
+
   isLoading.value = true
   message.value = null
   errorMessage.value = null
@@ -487,8 +500,6 @@ async function handleBackupSubmit() {
     } else {
       backupForm.value.schedule_cron = generatedCron.value
     }
-
-    console.log('Submitting update:', backupForm.value)
     
     const res = await jobService.updateJob(jobId.value, backupForm.value)
     message.value = res.message || 'Job updated successfully!'
@@ -506,31 +517,19 @@ function close() {
   emit('close') 
 }
 
-// ✅ Watch untuk ketika modal dibuka
 watch(() => props.isVisible, (newVal) => {
   if (newVal && props.jobData) {
-    console.log('=== MODAL OPENED ===')
-    console.log('Modal opened with job data:', props.jobData)
-    console.log('Job data type:', typeof props.jobData)
-    console.log('Job data keys:', Object.keys(props.jobData))
-    console.log('Raw job data:', JSON.stringify(props.jobData, null, 2))
     fetchRemoteList()
     populateForm(props.jobData)
   }
 })
 
-// ✅ Watch untuk ketika jobData berubah
 watch(() => props.jobData, (newData) => {
   if (props.isVisible && newData) {
-    console.log('=== JOB DATA CHANGED ===')
-    console.log('Job data changed:', newData)
-    console.log('Job data keys:', Object.keys(newData))
-    console.log('Raw job data:', JSON.stringify(newData, null, 2))
     populateForm(newData)
   }
 }, { deep: true })
 
-// ✅ Initial load
 onMounted(() => {
   fetchRemoteList()
   if (props.isVisible && props.jobData) {
@@ -551,9 +550,13 @@ onMounted(() => {
 .config-form { padding: 1.5rem; }
 .form-description { color: #666; margin: 0 0 1.5rem 0; font-size: 0.9375rem; }
 .form-group { margin-bottom: 1.25rem; }
+.form-group.has-error input { border-color: #ef4444; }
 .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 500; color: #1a1a1a; font-size: 0.875rem; }
 .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 0.625rem 0.875rem; border: 1px solid #e5e5e5; border-radius: 6px; font-size: 0.9375rem; transition: all 0.2s; box-sizing: border-box; }
 .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: #1a1a1a; }
+.input-error { border-color: #ef4444 !important; }
+.input-error:focus { border-color: #dc2626 !important; }
+.error-message { display: block; margin-top: 0.375rem; font-size: 0.8125rem; color: #ef4444; font-weight: 500; }
 
 .disabled-group {
   opacity: 0.6;
@@ -608,14 +611,4 @@ onMounted(() => {
 .slide-fade-leave-active { transition: all 0.2s cubic-bezier(1.0, 0.5, 0.8, 1.0); }
 .slide-fade-enter-from { transform: translateY(-10px); opacity: 0; }
 .slide-fade-leave-to { transform: translateY(-10px); opacity: 0; }
-.fade-enter-active, .fade-leave-active { transition: opacity 0.3s; }
-.fade-enter-from, .fade-leave-to { opacity: 0; }
-
-@media (max-width: 768px) { 
-  .modal-content { width: 95%; } 
-  .config-form { padding: 1rem; } 
-  .schedule-type-selector { grid-template-columns: repeat(auto-fit, minmax(70px, 1fr)); } 
-  .form-actions { flex-direction: column; } 
-  .btn-submit, .btn-secondary { width: 100%; } 
-}
 </style>
