@@ -4,3 +4,5 @@
 vendor/
 .env
 backend_app
+backend.log
+frontend.log

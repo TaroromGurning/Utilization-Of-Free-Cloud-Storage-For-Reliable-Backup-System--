@@ -12,38 +12,52 @@ High performance, minimalist Go web framework
 https://echo.labstack.com
 ____________________________________O/_______
                                     O\
+⇨ http server started on [::]:8080
 🚀 Scheduler Daemon Aktif, Pengecekan Job tiap 1m0s
 [Daemon] Monitoring Daemon aktif, pengecekan tiap 5m0s
-⇨ http server started on [::]:8080
-[Daemon] 📡 Checking status for 4 remote(s)...
+[Daemon] 📡 Checking status for 3 remote(s)...
 
 ======================================================================
 [SYNC] 🔄 Starting database sync with rclone.conf
 ======================================================================
 [SYNC] 1️⃣ Fetching remotes from rclone.conf...
+[Monitoring] Mengecek remote: kampus
 [Monitoring] Mengecek remote: sthvly
 [Monitoring] Mengecek remote: zkyle
-[Monitoring] Mengecek remote: kampus
-[Monitoring] Mengecek remote: Work-Drive
+[SYNC] ✓ Found 3 remote(s) in rclone.conf: [kampus sthvly zkyle]
+[SYNC] 2️⃣ Fetching remotes from database...
+[SYNC] ✓ Found 3 remote(s) in database: [kampus sthvly zkyle]
+[SYNC] 3️⃣ Finding remotes to delete...
+[SYNC] ✓ No remotes to delete
+[SYNC] 4️⃣ Finding new remotes to add...
+[SYNC] ✓ No new remotes to add
+[SYNC] ✅ Database is already in sync with rclone.conf
+======================================================================
+
+[DEBUG] Remote 'sthvly': 1 active jobs
+[Service] Extract email untuk remote: sthvly
+[DEBUG] Section found at position 544-1088
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_Ij6N-AlxFHzaqxwDLXHQ0HBD0A0-kjNHMV_qsnvSeBoeO_6ECHIv4IeO37S89aFt7cyxBX
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_Ij6N-AlxFHzaqxwDL...
+[DEBUG] Remote 'kampus': 8 active jobs
+[Service] Extract email untuk remote: kampus
+[DEBUG] Section found at position 0-544
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_JMKqdJRzY5FV5QsuXmeVYfMiXeC2Clw48e51bRdz2hk-kDdAG7F4JdYAsSMCDYam-NmCEp
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_JMKqdJRzY5FV5QsuX...
+[DEBUG] Remote 'zkyle': 4 active jobs
+[Service] Extract email untuk remote: zkyle
+[DEBUG] Section found at position 1088-1631
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_IDOqAJ1i9Ck_up7W-6b8cBy8N4_JSMh4rUl9ArjMntmLQKnIhQMrmdk976KvsN7MYmyfm4
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_IDOqAJ1i9Ck_up7W-...
 [Startup] Inisialisasi status remote monitoring...
 
 ======================================================================
 [SYNC] 🔄 Starting database sync with rclone.conf
 ======================================================================
 [SYNC] 1️⃣ Fetching remotes from rclone.conf...
-[SYNC] ✓ Found 4 remote(s) in rclone.conf: [kampus sthvly zkyle Work-Drive]
+[SYNC] ✓ Found 3 remote(s) in rclone.conf: [kampus sthvly zkyle]
 [SYNC] 2️⃣ Fetching remotes from database...
-[SYNC] ✓ Found 4 remote(s) in database: [kampus sthvly Work-Drive zkyle]
-[SYNC] 3️⃣ Finding remotes to delete...
-[SYNC] ✓ No remotes to delete
-[SYNC] 4️⃣ Finding new remotes to add...
-[SYNC] ✓ No new remotes to add
-[SYNC] ✅ Database is already in sync with rclone.conf
-======================================================================
-
-[SYNC] ✓ Found 4 remote(s) in rclone.conf: [kampus sthvly zkyle Work-Drive]
-[SYNC] 2️⃣ Fetching remotes from database...
-[SYNC] ✓ Found 4 remote(s) in database: [kampus sthvly Work-Drive zkyle]
+[SYNC] ✓ Found 3 remote(s) in database: [kampus sthvly zkyle]
 [SYNC] 3️⃣ Finding remotes to delete...
 [SYNC] ✓ No remotes to delete
 [SYNC] 4️⃣ Finding new remotes to add...
@@ -52,71 +66,1101 @@ ____________________________________O/_______
 ======================================================================
 
 [DEBUG] Remote 'kampus': 8 active jobs
-[DEBUG] Remote 'sthvly': 0 active jobs
-[DEBUG] Remote 'zkyle': 2 active jobs
-[DEBUG] Remote 'Work-Drive': 0 active jobs
-✅ Menemukan 4 remote, memulai update status...
+[DEBUG] Remote 'sthvly': 1 active jobs
+[DEBUG] Remote 'zkyle': 4 active jobs
+✅ Menemukan 3 remote, memulai update status...
 ✅ Inisialisasi remote monitoring selesai.
-[Monitoring] Mengecek remote: Work-Drive
 [Monitoring] Mengecek remote: zkyle
-[Monitoring] Mengecek remote: sthvly
 [Monitoring] Mengecek remote: kampus
-[DEBUG] Remote 'kampus': 8 active jobs
-[Service] Extract email untuk remote: kampus
-[DEBUG] Section found at position 0-544
-[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_KUDiAz80HYn82PUbv7ksjvlU0AQsdiI08TBj-wbm4yQ2Z-B7B2JkZCoSu4ol6nx65Tku07
-[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_KUDiAz80HYn82PUbv...
-[DEBUG] Remote 'sthvly': 0 active jobs
-[Service] Extract email untuk remote: sthvly
-[DEBUG] Section found at position 544-1088
-[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_LjyjsIYoz_eMZgSY8Xo3M8ekHizq0s6r_FAqiIqjsM4VJOKNjanTfY1P-LgA_arZKD2VaV
-[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_LjyjsIYoz_eMZgSY8...
-[DEBUG] Remote 'Work-Drive': 0 active jobs
-[Service] Extract email untuk remote: Work-Drive
-[DEBUG] Section found at position 1631-2177
-[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_JpTNmQxk1453axKvENrmSo20B3uNZDxoBX_5qspY-50ck8w7d_ORyNvyrtNrBKfPLXuLvq
-[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_JpTNmQxk1453axKvE...
-[DEBUG] Remote 'zkyle': 2 active jobs
-[Service] Extract email untuk remote: zkyle
-[DEBUG] Section found at position 1088-1631
-[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_IHdNaRmxh3DQq4p9cPhpHVQf-33eb8qfWZf-4hSF-Pc77Lp9FxgyNmqlOicShhWVq3uLOJ
-[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_IHdNaRmxh3DQq4p9c...
-[DEBUG] Remote 'kampus': 8 active jobs
-[Service] Extract email untuk remote: kampus
-[DEBUG] Section found at position 0-544
-[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_KUDiAz80HYn82PUbv7ksjvlU0AQsdiI08TBj-wbm4yQ2Z-B7B2JkZCoSu4ol6nx65Tku07
-[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_KUDiAz80HYn82PUbv...
-[DEBUG] Remote 'sthvly': 0 active jobs
-[Service] Extract email untuk remote: sthvly
-[DEBUG] Section found at position 544-1088
-[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_LjyjsIYoz_eMZgSY8Xo3M8ekHizq0s6r_FAqiIqjsM4VJOKNjanTfY1P-LgA_arZKD2VaV
-[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_LjyjsIYoz_eMZgSY8...
-[DEBUG] Remote 'Work-Drive': 0 active jobs
-[Service] Extract email untuk remote: Work-Drive
-[DEBUG] Section found at position 1631-2177
-[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_JpTNmQxk1453axKvENrmSo20B3uNZDxoBX_5qspY-50ck8w7d_ORyNvyrtNrBKfPLXuLvq
-[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_JpTNmQxk1453axKvE...
-✅ Email ditemukan untuk kampus: kilerumapea@gmail.com
-✅ kampus: 3.84 GB / 15.00 GB (25.6%) | 8 active jobs | Email: kilerumapea@gmail.com
-✅ Email ditemukan untuk sthvly: rumpetkiel5@gmail.com
-✅ sthvly: 14.81 GB / 15.00 GB (98.7%) | 0 active jobs | Email: rumpetkiel5@gmail.com
-✅ Email ditemukan untuk kampus: kilerumapea@gmail.com
-✅ kampus: 3.84 GB / 15.00 GB (25.6%) | 8 active jobs | Email: kilerumapea@gmail.com
-✅ Email ditemukan untuk sthvly: rumpetkiel5@gmail.com
-✅ sthvly: 14.81 GB / 15.00 GB (98.7%) | 0 active jobs | Email: rumpetkiel5@gmail.com
+[Monitoring] Mengecek remote: sthvly
 ✅ Email ditemukan untuk zkyle: rumapeayehezkiel@gmail.com
-✅ zkyle: 1.18 GB / 15.00 GB (7.9%) | 2 active jobs | Email: rumapeayehezkiel@gmail.com
-✅ Email ditemukan untuk Work-Drive: ielrumapea@gmail.com
-✅ Work-Drive: 2.41 GB / 2048.00 GB (0.1%) | 0 active jobs | Email: ielrumapea@gmail.com
-[DEBUG] Remote 'zkyle': 2 active jobs
+✅ zkyle: 1.18 GB / 15.00 GB (7.9%) | 4 active jobs | Email: rumapeayehezkiel@gmail.com
+✅ Email ditemukan untuk sthvly: rumpetkiel5@gmail.com
+✅ sthvly: 14.81 GB / 15.00 GB (98.7%) | 1 active jobs | Email: rumpetkiel5@gmail.com
+✅ Email ditemukan untuk kampus: kilerumapea@gmail.com
+✅ kampus: 3.84 GB / 15.00 GB (25.6%) | 8 active jobs | Email: kilerumapea@gmail.com
+[DEBUG] Remote 'zkyle': 4 active jobs
 [Service] Extract email untuk remote: zkyle
 [DEBUG] Section found at position 1088-1631
-[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_IHdNaRmxh3DQq4p9cPhpHVQf-33eb8qfWZf-4hSF-Pc77Lp9FxgyNmqlOicShhWVq3uLOJ
-[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_IHdNaRmxh3DQq4p9c...
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_IDOqAJ1i9Ck_up7W-6b8cBy8N4_JSMh4rUl9ArjMntmLQKnIhQMrmdk976KvsN7MYmyfm4
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_IDOqAJ1i9Ck_up7W-...
+[DEBUG] Remote 'kampus': 8 active jobs
+[Service] Extract email untuk remote: kampus
+[DEBUG] Section found at position 0-544
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_JMKqdJRzY5FV5QsuXmeVYfMiXeC2Clw48e51bRdz2hk-kDdAG7F4JdYAsSMCDYam-NmCEp
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_JMKqdJRzY5FV5QsuX...
+[DEBUG] Remote 'sthvly': 1 active jobs
+[Service] Extract email untuk remote: sthvly
+[DEBUG] Section found at position 544-1088
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_Ij6N-AlxFHzaqxwDLXHQ0HBD0A0-kjNHMV_qsnvSeBoeO_6ECHIv4IeO37S89aFt7cyxBX
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_Ij6N-AlxFHzaqxwDL...
+✅ Email ditemukan untuk kampus: kilerumapea@gmail.com
+✅ kampus: 3.84 GB / 15.00 GB (25.6%) | 8 active jobs | Email: kilerumapea@gmail.com
+✅ Email ditemukan untuk sthvly: rumpetkiel5@gmail.com
+✅ sthvly: 14.81 GB / 15.00 GB (98.7%) | 1 active jobs | Email: rumpetkiel5@gmail.com
+✅ Email ditemukan untuk zkyle: rumapeayehezkiel@gmail.com
+✅ zkyle: 1.18 GB / 15.00 GB (7.9%) | 4 active jobs | Email: rumapeayehezkiel@gmail.com
+{"time":"2026-01-24T13:51:59.85420113+07:00","id":"","remote_ip":"127.0.0.1","host":"localhost:8080","method":"GET","uri":"/api/v1/setup/status","user_agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36","status":200,"error":"","latency":1189706,"latency_human":"1.189706ms","bytes_in":0,"bytes_out":29}
+{"time":"2026-01-24T13:51:59.893144854+07:00","id":"","remote_ip":"127.0.0.1","host":"localhost:8080","method":"GET","uri":"/api/v1/monitoring/logs","user_agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36","status":200,"error":"","latency":3946297,"latency_human":"3.946297ms","bytes_in":0,"bytes_out":62342}
+{"time":"2026-01-24T13:52:03.598270068+07:00","id":"","remote_ip":"127.0.0.1","host":"localhost:8080","method":"GET","uri":"/api/v1/setup/status","user_agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36","status":200,"error":"","latency":1589702,"latency_human":"1.589702ms","bytes_in":0,"bytes_out":29}
+{"time":"2026-01-24T13:52:03.627179645+07:00","id":"","remote_ip":"127.0.0.1","host":"localhost:8080","method":"GET","uri":"/api/v1/monitoring/logs","user_agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36","status":200,"error":"","latency":3363057,"latency_human":"3.363057ms","bytes_in":0,"bytes_out":62342}
+[Daemon] Menjalankan sinkronisasi remote dengan rclone.conf...
 
-2026/01/12 20:00:14 [32m/home/yehezkiel/G-Backup/Backend/internal/repository/monitoring_repo.go:41 [33mSLOW SQL >= 200ms
-[0m[31;1m[284.462ms] [33m[rows:1][35m INSERT INTO `monitorings` (`remote_name`,`status_connect`,`system_message`,`total_storage_gb`,`used_storage_gb`,`free_storage_gb`,`last_checked_at`,`active_job_count`,`transferred_bytes`,`owner_email`) VALUES ('sthvly','CONNECTED','⚠️ Storage terisi 98.7%. PERINGATAN!',15,14.807701363228261,0.19150746520608664,'2026-01-12 20:00:13.056',0,0,'rumpetkiel5@gmail.com') ON DUPLICATE KEY UPDATE `status_connect`=VALUES(`status_connect`),`total_storage_gb`=VALUES(`total_storage_gb`),`used_storage_gb`=VALUES(`used_storage_gb`),`free_storage_gb`=VALUES(`free_storage_gb`),`last_checked_at`=VALUES(`last_checked_at`),`system_message`=VALUES(`system_message`),`active_job_count`=VALUES(`active_job_count`),`owner_email`=VALUES(`owner_email`) RETURNING `id`[0m
-✅ Email ditemukan untuk Work-Drive: ielrumapea@gmail.com
-✅ Work-Drive: 2.41 GB / 2048.00 GB (0.1%) | 0 active jobs | Email: ielrumapea@gmail.com
+======================================================================
+[SYNC] 🔄 Starting database sync with rclone.conf
+======================================================================
+[SYNC] 1️⃣ Fetching remotes from rclone.conf...
+[SYNC] ✓ Found 3 remote(s) in rclone.conf: [kampus sthvly zkyle]
+[SYNC] 2️⃣ Fetching remotes from database...
+[SYNC] ✓ Found 3 remote(s) in database: [kampus sthvly zkyle]
+[SYNC] 3️⃣ Finding remotes to delete...
+[SYNC] ✓ No remotes to delete
+[SYNC] 4️⃣ Finding new remotes to add...
+[SYNC] ✓ No new remotes to add
+[SYNC] ✅ Database is already in sync with rclone.conf
+======================================================================
+
+[Daemon] 📡 Checking status for 3 remote(s)...
+[Monitoring] Mengecek remote: zkyle
+[Monitoring] Mengecek remote: kampus
+[Monitoring] Mengecek remote: sthvly
+[DEBUG] Remote 'zkyle': 4 active jobs
+[Service] Extract email untuk remote: zkyle
+[DEBUG] Section found at position 1088-1631
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_IDOqAJ1i9Ck_up7W-6b8cBy8N4_JSMh4rUl9ArjMntmLQKnIhQMrmdk976KvsN7MYmyfm4
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_IDOqAJ1i9Ck_up7W-...
+[DEBUG] Remote 'kampus': 8 active jobs
+[Service] Extract email untuk remote: kampus
+[DEBUG] Section found at position 0-544
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_JMKqdJRzY5FV5QsuXmeVYfMiXeC2Clw48e51bRdz2hk-kDdAG7F4JdYAsSMCDYam-NmCEp
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_JMKqdJRzY5FV5QsuX...
+[DEBUG] Remote 'sthvly': 1 active jobs
+[Service] Extract email untuk remote: sthvly
+[DEBUG] Section found at position 544-1088
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_Ij6N-AlxFHzaqxwDLXHQ0HBD0A0-kjNHMV_qsnvSeBoeO_6ECHIv4IeO37S89aFt7cyxBX
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_Ij6N-AlxFHzaqxwDL...
 ✅ Email ditemukan untuk zkyle: rumapeayehezkiel@gmail.com
-✅ zkyle: 1.18 GB / 15.00 GB (7.9%) | 2 active jobs | Email: rumapeayehezkiel@gmail.com
+✅ zkyle: 1.18 GB / 15.00 GB (7.9%) | 4 active jobs | Email: rumapeayehezkiel@gmail.com
+✅ Email ditemukan untuk kampus: kilerumapea@gmail.com
+✅ kampus: 3.84 GB / 15.00 GB (25.6%) | 8 active jobs | Email: kilerumapea@gmail.com
+✅ Email ditemukan untuk sthvly: rumpetkiel5@gmail.com
+✅ sthvly: 14.81 GB / 15.00 GB (98.7%) | 1 active jobs | Email: rumpetkiel5@gmail.com
+[Daemon] Menjalankan sinkronisasi remote dengan rclone.conf...
+
+======================================================================
+[SYNC] 🔄 Starting database sync with rclone.conf
+======================================================================
+[SYNC] 1️⃣ Fetching remotes from rclone.conf...
+[SYNC] ✓ Found 3 remote(s) in rclone.conf: [kampus sthvly zkyle]
+[SYNC] 2️⃣ Fetching remotes from database...
+[SYNC] ✓ Found 3 remote(s) in database: [kampus sthvly zkyle]
+[SYNC] 3️⃣ Finding remotes to delete...
+[SYNC] ✓ No remotes to delete
+[SYNC] 4️⃣ Finding new remotes to add...
+[SYNC] ✓ No new remotes to add
+[SYNC] ✅ Database is already in sync with rclone.conf
+======================================================================
+
+[Daemon] 📡 Checking status for 3 remote(s)...
+[Monitoring] Mengecek remote: zkyle
+[Monitoring] Mengecek remote: kampus
+[Monitoring] Mengecek remote: sthvly
+[DEBUG] Remote 'kampus': 8 active jobs
+[Service] Extract email untuk remote: kampus
+[DEBUG] Section found at position 0-544
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_JMKqdJRzY5FV5QsuXmeVYfMiXeC2Clw48e51bRdz2hk-kDdAG7F4JdYAsSMCDYam-NmCEp
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_JMKqdJRzY5FV5QsuX...
+[DEBUG] Remote 'sthvly': 1 active jobs
+[Service] Extract email untuk remote: sthvly
+[DEBUG] Section found at position 544-1088
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_Ij6N-AlxFHzaqxwDLXHQ0HBD0A0-kjNHMV_qsnvSeBoeO_6ECHIv4IeO37S89aFt7cyxBX
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_Ij6N-AlxFHzaqxwDL...
+[DEBUG] Remote 'zkyle': 4 active jobs
+[Service] Extract email untuk remote: zkyle
+[DEBUG] Section found at position 1088-1631
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_IDOqAJ1i9Ck_up7W-6b8cBy8N4_JSMh4rUl9ArjMntmLQKnIhQMrmdk976KvsN7MYmyfm4
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_IDOqAJ1i9Ck_up7W-...
+✅ Email ditemukan untuk kampus: kilerumapea@gmail.com
+✅ kampus: 3.84 GB / 15.00 GB (25.6%) | 8 active jobs | Email: kilerumapea@gmail.com
+✅ Email ditemukan untuk sthvly: rumpetkiel5@gmail.com
+✅ sthvly: 14.81 GB / 15.00 GB (98.7%) | 1 active jobs | Email: rumpetkiel5@gmail.com
+✅ Email ditemukan untuk zkyle: rumapeayehezkiel@gmail.com
+✅ zkyle: 1.18 GB / 15.00 GB (7.9%) | 4 active jobs | Email: rumapeayehezkiel@gmail.com
+[Daemon] Menjalankan sinkronisasi remote dengan rclone.conf...
+
+======================================================================
+[SYNC] 🔄 Starting database sync with rclone.conf
+======================================================================
+[SYNC] 1️⃣ Fetching remotes from rclone.conf...
+[SYNC] ✓ Found 3 remote(s) in rclone.conf: [kampus sthvly zkyle]
+[SYNC] 2️⃣ Fetching remotes from database...
+[SYNC] ✓ Found 3 remote(s) in database: [kampus sthvly zkyle]
+[SYNC] 3️⃣ Finding remotes to delete...
+[SYNC] ✓ No remotes to delete
+[SYNC] 4️⃣ Finding new remotes to add...
+[SYNC] ✓ No new remotes to add
+[SYNC] ✅ Database is already in sync with rclone.conf
+======================================================================
+
+[Daemon] 📡 Checking status for 3 remote(s)...
+[Monitoring] Mengecek remote: zkyle
+[Monitoring] Mengecek remote: kampus
+[Monitoring] Mengecek remote: sthvly
+[DEBUG] Remote 'sthvly': 1 active jobs
+[Service] Extract email untuk remote: sthvly
+[DEBUG] Section found at position 544-1088
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_Ij6N-AlxFHzaqxwDLXHQ0HBD0A0-kjNHMV_qsnvSeBoeO_6ECHIv4IeO37S89aFt7cyxBX
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_Ij6N-AlxFHzaqxwDL...
+[DEBUG] Remote 'kampus': 8 active jobs
+[Service] Extract email untuk remote: kampus
+[DEBUG] Section found at position 0-544
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_JMKqdJRzY5FV5QsuXmeVYfMiXeC2Clw48e51bRdz2hk-kDdAG7F4JdYAsSMCDYam-NmCEp
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_JMKqdJRzY5FV5QsuX...
+[DEBUG] Remote 'zkyle': 4 active jobs
+[Service] Extract email untuk remote: zkyle
+[DEBUG] Section found at position 1088-1631
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_IDOqAJ1i9Ck_up7W-6b8cBy8N4_JSMh4rUl9ArjMntmLQKnIhQMrmdk976KvsN7MYmyfm4
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_IDOqAJ1i9Ck_up7W-...
+✅ Email ditemukan untuk sthvly: rumpetkiel5@gmail.com
+✅ sthvly: 14.81 GB / 15.00 GB (98.7%) | 1 active jobs | Email: rumpetkiel5@gmail.com
+✅ Email ditemukan untuk kampus: kilerumapea@gmail.com
+✅ kampus: 3.84 GB / 15.00 GB (25.6%) | 8 active jobs | Email: kilerumapea@gmail.com
+✅ Email ditemukan untuk zkyle: rumapeayehezkiel@gmail.com
+✅ zkyle: 1.18 GB / 15.00 GB (7.9%) | 4 active jobs | Email: rumapeayehezkiel@gmail.com
+[Daemon] Menjalankan sinkronisasi remote dengan rclone.conf...
+
+======================================================================
+[SYNC] 🔄 Starting database sync with rclone.conf
+======================================================================
+[SYNC] 1️⃣ Fetching remotes from rclone.conf...
+[SYNC] ✓ Found 3 remote(s) in rclone.conf: [kampus sthvly zkyle]
+[SYNC] 2️⃣ Fetching remotes from database...
+[SYNC] ✓ Found 3 remote(s) in database: [kampus sthvly zkyle]
+[SYNC] 3️⃣ Finding remotes to delete...
+[SYNC] ✓ No remotes to delete
+[SYNC] 4️⃣ Finding new remotes to add...
+[SYNC] ✓ No new remotes to add
+[SYNC] ✅ Database is already in sync with rclone.conf
+======================================================================
+
+[Daemon] 📡 Checking status for 3 remote(s)...
+[Monitoring] Mengecek remote: zkyle
+[Monitoring] Mengecek remote: kampus
+[Monitoring] Mengecek remote: sthvly
+[DEBUG] Remote 'sthvly': 1 active jobs
+[Service] Extract email untuk remote: sthvly
+[DEBUG] Section found at position 544-1088
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_Ij6N-AlxFHzaqxwDLXHQ0HBD0A0-kjNHMV_qsnvSeBoeO_6ECHIv4IeO37S89aFt7cyxBX
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_Ij6N-AlxFHzaqxwDL...
+[DEBUG] Remote 'zkyle': 4 active jobs
+[Service] Extract email untuk remote: zkyle
+[DEBUG] Section found at position 1088-1631
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_IDOqAJ1i9Ck_up7W-6b8cBy8N4_JSMh4rUl9ArjMntmLQKnIhQMrmdk976KvsN7MYmyfm4
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_IDOqAJ1i9Ck_up7W-...
+[DEBUG] Remote 'kampus': 8 active jobs
+[Service] Extract email untuk remote: kampus
+[DEBUG] Section found at position 0-544
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_JMKqdJRzY5FV5QsuXmeVYfMiXeC2Clw48e51bRdz2hk-kDdAG7F4JdYAsSMCDYam-NmCEp
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_JMKqdJRzY5FV5QsuX...
+✅ Email ditemukan untuk sthvly: rumpetkiel5@gmail.com
+✅ sthvly: 14.81 GB / 15.00 GB (98.7%) | 1 active jobs | Email: rumpetkiel5@gmail.com
+✅ Email ditemukan untuk kampus: kilerumapea@gmail.com
+✅ kampus: 3.84 GB / 15.00 GB (25.6%) | 8 active jobs | Email: kilerumapea@gmail.com
+✅ Email ditemukan untuk zkyle: rumapeayehezkiel@gmail.com
+✅ zkyle: 1.18 GB / 15.00 GB (7.9%) | 4 active jobs | Email: rumapeayehezkiel@gmail.com
+[Daemon] Menjalankan pengecekan status remote...
+[Daemon] 📡 Checking status for 3 remote(s)...
+[Daemon] Menjalankan sinkronisasi remote dengan rclone.conf...
+
+======================================================================
+[SYNC] 🔄 Starting database sync with rclone.conf
+======================================================================
+[SYNC] 1️⃣ Fetching remotes from rclone.conf...
+[Monitoring] Mengecek remote: kampus
+[Monitoring] Mengecek remote: sthvly
+[Monitoring] Mengecek remote: zkyle
+[SYNC] ✓ Found 3 remote(s) in rclone.conf: [kampus sthvly zkyle]
+[SYNC] 2️⃣ Fetching remotes from database...
+[SYNC] ✓ Found 3 remote(s) in database: [kampus sthvly zkyle]
+[SYNC] 3️⃣ Finding remotes to delete...
+[SYNC] ✓ No remotes to delete
+[SYNC] 4️⃣ Finding new remotes to add...
+[SYNC] ✓ No new remotes to add
+[SYNC] ✅ Database is already in sync with rclone.conf
+======================================================================
+
+[Daemon] 📡 Checking status for 3 remote(s)...
+[Monitoring] Mengecek remote: zkyle
+[Monitoring] Mengecek remote: kampus
+[Monitoring] Mengecek remote: sthvly
+[DEBUG] Remote 'kampus': 8 active jobs
+[Service] Extract email untuk remote: kampus
+[DEBUG] Section found at position 0-544
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_JMKqdJRzY5FV5QsuXmeVYfMiXeC2Clw48e51bRdz2hk-kDdAG7F4JdYAsSMCDYam-NmCEp
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_JMKqdJRzY5FV5QsuX...
+[DEBUG] Remote 'sthvly': 1 active jobs
+[Service] Extract email untuk remote: sthvly
+[DEBUG] Section found at position 544-1088
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_Ij6N-AlxFHzaqxwDLXHQ0HBD0A0-kjNHMV_qsnvSeBoeO_6ECHIv4IeO37S89aFt7cyxBX
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_Ij6N-AlxFHzaqxwDL...
+[DEBUG] Remote 'zkyle': 4 active jobs
+[Service] Extract email untuk remote: zkyle
+[DEBUG] Section found at position 1088-1631
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_IDOqAJ1i9Ck_up7W-6b8cBy8N4_JSMh4rUl9ArjMntmLQKnIhQMrmdk976KvsN7MYmyfm4
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_IDOqAJ1i9Ck_up7W-...
+[DEBUG] Remote 'sthvly': 1 active jobs
+[Service] Extract email untuk remote: sthvly
+[DEBUG] Section found at position 544-1088
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_Ij6N-AlxFHzaqxwDLXHQ0HBD0A0-kjNHMV_qsnvSeBoeO_6ECHIv4IeO37S89aFt7cyxBX
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_Ij6N-AlxFHzaqxwDL...
+✅ Email ditemukan untuk kampus: kilerumapea@gmail.com
+✅ kampus: 3.84 GB / 15.00 GB (25.6%) | 8 active jobs | Email: kilerumapea@gmail.com
+[DEBUG] Remote 'zkyle': 4 active jobs
+[Service] Extract email untuk remote: zkyle
+[DEBUG] Section found at position 1088-1631
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_IDOqAJ1i9Ck_up7W-6b8cBy8N4_JSMh4rUl9ArjMntmLQKnIhQMrmdk976KvsN7MYmyfm4
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_IDOqAJ1i9Ck_up7W-...
+✅ Email ditemukan untuk sthvly: rumpetkiel5@gmail.com
+✅ sthvly: 14.81 GB / 15.00 GB (98.7%) | 1 active jobs | Email: rumpetkiel5@gmail.com
+[DEBUG] Remote 'kampus': 8 active jobs
+[Service] Extract email untuk remote: kampus
+[DEBUG] Section found at position 0-544
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_JMKqdJRzY5FV5QsuXmeVYfMiXeC2Clw48e51bRdz2hk-kDdAG7F4JdYAsSMCDYam-NmCEp
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_JMKqdJRzY5FV5QsuX...
+✅ Email ditemukan untuk zkyle: rumapeayehezkiel@gmail.com
+✅ zkyle: 1.18 GB / 15.00 GB (7.9%) | 4 active jobs | Email: rumapeayehezkiel@gmail.com
+✅ Email ditemukan untuk sthvly: rumpetkiel5@gmail.com
+✅ sthvly: 14.81 GB / 15.00 GB (98.7%) | 1 active jobs | Email: rumpetkiel5@gmail.com
+✅ Email ditemukan untuk zkyle: rumapeayehezkiel@gmail.com
+✅ zkyle: 1.18 GB / 15.00 GB (7.9%) | 4 active jobs | Email: rumapeayehezkiel@gmail.com
+✅ Email ditemukan untuk kampus: kilerumapea@gmail.com
+✅ kampus: 3.84 GB / 15.00 GB (25.6%) | 8 active jobs | Email: kilerumapea@gmail.com
+{"time":"2026-01-24T13:57:06.011891106+07:00","id":"","remote_ip":"127.0.0.1","host":"localhost:8080","method":"GET","uri":"/api/v1/monitoring/logs","user_agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36","status":200,"error":"","latency":4839315,"latency_human":"4.839315ms","bytes_in":0,"bytes_out":62342}
+{"time":"2026-01-24T13:57:13.965674342+07:00","id":"","remote_ip":"127.0.0.1","host":"localhost:8080","method":"GET","uri":"/api/v1/setup/status","user_agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36","status":200,"error":"","latency":1056368,"latency_human":"1.056368ms","bytes_in":0,"bytes_out":29}
+{"time":"2026-01-24T13:57:13.992203886+07:00","id":"","remote_ip":"127.0.0.1","host":"localhost:8080","method":"GET","uri":"/api/v1/monitoring/logs","user_agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36","status":200,"error":"","latency":3171286,"latency_human":"3.171286ms","bytes_in":0,"bytes_out":62342}
+[DEBUG] Remote 'kampus': 8 active jobs
+[DEBUG] Remote 'sthvly': 1 active jobs
+{"time":"2026-01-24T13:57:20.6533947+07:00","id":"","remote_ip":"127.0.0.1","host":"localhost:8080","method":"GET","uri":"/api/v1/monitoring/jobs","user_agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36","status":200,"error":"","latency":11991221,"latency_human":"11.991221ms","bytes_in":0,"bytes_out":955}
+{"time":"2026-01-24T13:57:20.653680763+07:00","id":"","remote_ip":"127.0.0.1","host":"localhost:8080","method":"GET","uri":"/api/v1/jobs/alljobs","user_agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36","status":200,"error":"","latency":12179883,"latency_human":"12.179883ms","bytes_in":0,"bytes_out":1034}
+[DEBUG] Remote 'zkyle': 4 active jobs
+{"time":"2026-01-24T13:57:20.655433372+07:00","id":"","remote_ip":"127.0.0.1","host":"localhost:8080","method":"GET","uri":"/api/v1/monitoring/remotes","user_agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36","status":200,"error":"","latency":15139192,"latency_human":"15.139192ms","bytes_in":0,"bytes_out":852}
+{"time":"2026-01-24T13:57:20.792220169+07:00","id":"","remote_ip":"127.0.0.1","host":"localhost:8080","method":"GET","uri":"/api/v1/browser/remotes","user_agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36","status":200,"error":"","latency":156684659,"latency_human":"156.684659ms","bytes_in":0,"bytes_out":171}
+{"time":"2026-01-24T13:57:22.397837085+07:00","id":"","remote_ip":"127.0.0.1","host":"localhost:8080","method":"GET","uri":"/api/v1/monitoring/logs","user_agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36","status":200,"error":"","latency":7382327,"latency_human":"7.382327ms","bytes_in":0,"bytes_out":62342}
+[Daemon] Menjalankan sinkronisasi remote dengan rclone.conf...
+
+======================================================================
+[SYNC] 🔄 Starting database sync with rclone.conf
+======================================================================
+[SYNC] 1️⃣ Fetching remotes from rclone.conf...
+[SYNC] ✓ Found 3 remote(s) in rclone.conf: [kampus sthvly zkyle]
+[SYNC] 2️⃣ Fetching remotes from database...
+[SYNC] ✓ Found 3 remote(s) in database: [kampus sthvly zkyle]
+[SYNC] 3️⃣ Finding remotes to delete...
+[SYNC] ✓ No remotes to delete
+[SYNC] 4️⃣ Finding new remotes to add...
+[SYNC] ✓ No new remotes to add
+[SYNC] ✅ Database is already in sync with rclone.conf
+======================================================================
+
+[Daemon] 📡 Checking status for 3 remote(s)...
+[Monitoring] Mengecek remote: zkyle
+[Monitoring] Mengecek remote: kampus
+[Monitoring] Mengecek remote: sthvly
+[DEBUG] Remote 'kampus': 8 active jobs
+[Service] Extract email untuk remote: kampus
+[DEBUG] Section found at position 0-544
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_JMKqdJRzY5FV5QsuXmeVYfMiXeC2Clw48e51bRdz2hk-kDdAG7F4JdYAsSMCDYam-NmCEp
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_JMKqdJRzY5FV5QsuX...
+[DEBUG] Remote 'sthvly': 1 active jobs
+[Service] Extract email untuk remote: sthvly
+[DEBUG] Section found at position 544-1088
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_Ij6N-AlxFHzaqxwDLXHQ0HBD0A0-kjNHMV_qsnvSeBoeO_6ECHIv4IeO37S89aFt7cyxBX
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_Ij6N-AlxFHzaqxwDL...
+[DEBUG] Remote 'zkyle': 4 active jobs
+[Service] Extract email untuk remote: zkyle
+[DEBUG] Section found at position 1088-1631
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_IDOqAJ1i9Ck_up7W-6b8cBy8N4_JSMh4rUl9ArjMntmLQKnIhQMrmdk976KvsN7MYmyfm4
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_IDOqAJ1i9Ck_up7W-...
+✅ Email ditemukan untuk kampus: kilerumapea@gmail.com
+✅ Email ditemukan untuk sthvly: rumpetkiel5@gmail.com
+✅ sthvly: 14.81 GB / 15.00 GB (98.7%) | 1 active jobs | Email: rumpetkiel5@gmail.com
+✅ kampus: 3.84 GB / 15.00 GB (25.6%) | 8 active jobs | Email: kilerumapea@gmail.com
+✅ Email ditemukan untuk zkyle: rumapeayehezkiel@gmail.com
+✅ zkyle: 1.18 GB / 15.00 GB (7.9%) | 4 active jobs | Email: rumapeayehezkiel@gmail.com
+[Daemon] Menjalankan sinkronisasi remote dengan rclone.conf...
+
+======================================================================
+[SYNC] 🔄 Starting database sync with rclone.conf
+======================================================================
+[SYNC] 1️⃣ Fetching remotes from rclone.conf...
+[SYNC] ✓ Found 3 remote(s) in rclone.conf: [kampus sthvly zkyle]
+[SYNC] 2️⃣ Fetching remotes from database...
+[SYNC] ✓ Found 3 remote(s) in database: [kampus sthvly zkyle]
+[SYNC] 3️⃣ Finding remotes to delete...
+[SYNC] ✓ No remotes to delete
+[SYNC] 4️⃣ Finding new remotes to add...
+[SYNC] ✓ No new remotes to add
+[SYNC] ✅ Database is already in sync with rclone.conf
+======================================================================
+
+[Daemon] 📡 Checking status for 3 remote(s)...
+[Monitoring] Mengecek remote: zkyle
+[Monitoring] Mengecek remote: kampus
+[Monitoring] Mengecek remote: sthvly
+[DEBUG] Remote 'zkyle': 4 active jobs
+[Service] Extract email untuk remote: zkyle
+[DEBUG] Section found at position 1088-1631
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_IDOqAJ1i9Ck_up7W-6b8cBy8N4_JSMh4rUl9ArjMntmLQKnIhQMrmdk976KvsN7MYmyfm4
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_IDOqAJ1i9Ck_up7W-...
+[DEBUG] Remote 'sthvly': 1 active jobs
+[Service] Extract email untuk remote: sthvly
+[DEBUG] Section found at position 544-1088
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_Ij6N-AlxFHzaqxwDLXHQ0HBD0A0-kjNHMV_qsnvSeBoeO_6ECHIv4IeO37S89aFt7cyxBX
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_Ij6N-AlxFHzaqxwDL...
+[DEBUG] Remote 'kampus': 8 active jobs
+[Service] Extract email untuk remote: kampus
+[DEBUG] Section found at position 0-544
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_JMKqdJRzY5FV5QsuXmeVYfMiXeC2Clw48e51bRdz2hk-kDdAG7F4JdYAsSMCDYam-NmCEp
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_JMKqdJRzY5FV5QsuX...
+✅ Email ditemukan untuk zkyle: rumapeayehezkiel@gmail.com
+✅ zkyle: 1.18 GB / 15.00 GB (7.9%) | 4 active jobs | Email: rumapeayehezkiel@gmail.com
+✅ Email ditemukan untuk sthvly: rumpetkiel5@gmail.com
+✅ sthvly: 14.81 GB / 15.00 GB (98.7%) | 1 active jobs | Email: rumpetkiel5@gmail.com
+✅ Email ditemukan untuk kampus: kilerumapea@gmail.com
+✅ kampus: 3.84 GB / 15.00 GB (25.6%) | 8 active jobs | Email: kilerumapea@gmail.com
+[Daemon] Menjalankan sinkronisasi remote dengan rclone.conf...
+
+======================================================================
+[SYNC] 🔄 Starting database sync with rclone.conf
+======================================================================
+[SYNC] 1️⃣ Fetching remotes from rclone.conf...
+[SYNC] ✓ Found 3 remote(s) in rclone.conf: [kampus sthvly zkyle]
+[SYNC] 2️⃣ Fetching remotes from database...
+[SYNC] ✓ Found 3 remote(s) in database: [kampus sthvly zkyle]
+[SYNC] 3️⃣ Finding remotes to delete...
+[SYNC] ✓ No remotes to delete
+[SYNC] 4️⃣ Finding new remotes to add...
+[SYNC] ✓ No new remotes to add
+[SYNC] ✅ Database is already in sync with rclone.conf
+======================================================================
+
+[Daemon] 📡 Checking status for 3 remote(s)...
+[Monitoring] Mengecek remote: zkyle
+[Monitoring] Mengecek remote: kampus
+[Monitoring] Mengecek remote: sthvly
+[DEBUG] Remote 'kampus': 8 active jobs
+[Service] Extract email untuk remote: kampus
+[DEBUG] Section found at position 0-544
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_JMKqdJRzY5FV5QsuXmeVYfMiXeC2Clw48e51bRdz2hk-kDdAG7F4JdYAsSMCDYam-NmCEp
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_JMKqdJRzY5FV5QsuX...
+[DEBUG] Remote 'sthvly': 1 active jobs
+[Service] Extract email untuk remote: sthvly
+[DEBUG] Section found at position 544-1088
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_Ij6N-AlxFHzaqxwDLXHQ0HBD0A0-kjNHMV_qsnvSeBoeO_6ECHIv4IeO37S89aFt7cyxBX
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_Ij6N-AlxFHzaqxwDL...
+[DEBUG] Remote 'zkyle': 4 active jobs
+[Service] Extract email untuk remote: zkyle
+[DEBUG] Section found at position 1088-1631
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_IDOqAJ1i9Ck_up7W-6b8cBy8N4_JSMh4rUl9ArjMntmLQKnIhQMrmdk976KvsN7MYmyfm4
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_IDOqAJ1i9Ck_up7W-...
+✅ Email ditemukan untuk sthvly: rumpetkiel5@gmail.com
+✅ sthvly: 14.81 GB / 15.00 GB (98.7%) | 1 active jobs | Email: rumpetkiel5@gmail.com
+✅ Email ditemukan untuk kampus: kilerumapea@gmail.com
+✅ kampus: 3.84 GB / 15.00 GB (25.6%) | 8 active jobs | Email: kilerumapea@gmail.com
+✅ Email ditemukan untuk zkyle: rumapeayehezkiel@gmail.com
+✅ zkyle: 1.18 GB / 15.00 GB (7.9%) | 4 active jobs | Email: rumapeayehezkiel@gmail.com
+[Daemon] Menjalankan sinkronisasi remote dengan rclone.conf...
+
+======================================================================
+[SYNC] 🔄 Starting database sync with rclone.conf
+======================================================================
+[SYNC] 1️⃣ Fetching remotes from rclone.conf...
+[SYNC] ✓ Found 3 remote(s) in rclone.conf: [kampus sthvly zkyle]
+[SYNC] 2️⃣ Fetching remotes from database...
+[SYNC] ✓ Found 3 remote(s) in database: [kampus sthvly zkyle]
+[SYNC] 3️⃣ Finding remotes to delete...
+[SYNC] ✓ No remotes to delete
+[SYNC] 4️⃣ Finding new remotes to add...
+[SYNC] ✓ No new remotes to add
+[SYNC] ✅ Database is already in sync with rclone.conf
+======================================================================
+
+[Daemon] 📡 Checking status for 3 remote(s)...
+[Monitoring] Mengecek remote: zkyle
+[Monitoring] Mengecek remote: kampus
+[Monitoring] Mengecek remote: sthvly
+[DEBUG] Remote 'kampus': 8 active jobs
+[Service] Extract email untuk remote: kampus
+[DEBUG] Section found at position 0-544
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_JMKqdJRzY5FV5QsuXmeVYfMiXeC2Clw48e51bRdz2hk-kDdAG7F4JdYAsSMCDYam-NmCEp
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_JMKqdJRzY5FV5QsuX...
+[DEBUG] Remote 'sthvly': 1 active jobs
+[Service] Extract email untuk remote: sthvly
+[DEBUG] Section found at position 544-1088
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_Ij6N-AlxFHzaqxwDLXHQ0HBD0A0-kjNHMV_qsnvSeBoeO_6ECHIv4IeO37S89aFt7cyxBX
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_Ij6N-AlxFHzaqxwDL...
+[DEBUG] Remote 'zkyle': 4 active jobs
+[Service] Extract email untuk remote: zkyle
+[DEBUG] Section found at position 1088-1631
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_IDOqAJ1i9Ck_up7W-6b8cBy8N4_JSMh4rUl9ArjMntmLQKnIhQMrmdk976KvsN7MYmyfm4
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_IDOqAJ1i9Ck_up7W-...
+✅ Email ditemukan untuk kampus: kilerumapea@gmail.com
+✅ kampus: 3.84 GB / 15.00 GB (25.6%) | 8 active jobs | Email: kilerumapea@gmail.com
+✅ Email ditemukan untuk sthvly: rumpetkiel5@gmail.com
+✅ sthvly: 14.81 GB / 15.00 GB (98.7%) | 1 active jobs | Email: rumpetkiel5@gmail.com
+✅ Email ditemukan untuk zkyle: rumapeayehezkiel@gmail.com
+✅ zkyle: 1.18 GB / 15.00 GB (7.9%) | 4 active jobs | Email: rumapeayehezkiel@gmail.com
+[Daemon] Menjalankan pengecekan status remote...
+[Daemon] 📡 Checking status for 3 remote(s)...
+[Daemon] Menjalankan sinkronisasi remote dengan rclone.conf...
+
+======================================================================
+[SYNC] 🔄 Starting database sync with rclone.conf
+======================================================================
+[SYNC] 1️⃣ Fetching remotes from rclone.conf...
+[Monitoring] Mengecek remote: kampus
+[Monitoring] Mengecek remote: sthvly
+[Monitoring] Mengecek remote: zkyle
+[SYNC] ✓ Found 3 remote(s) in rclone.conf: [kampus sthvly zkyle]
+[SYNC] 2️⃣ Fetching remotes from database...
+[SYNC] ✓ Found 3 remote(s) in database: [kampus sthvly zkyle]
+[SYNC] 3️⃣ Finding remotes to delete...
+[SYNC] ✓ No remotes to delete
+[SYNC] 4️⃣ Finding new remotes to add...
+[SYNC] ✓ No new remotes to add
+[SYNC] ✅ Database is already in sync with rclone.conf
+======================================================================
+
+[Daemon] 📡 Checking status for 3 remote(s)...
+[Monitoring] Mengecek remote: zkyle
+[Monitoring] Mengecek remote: kampus
+[Monitoring] Mengecek remote: sthvly
+[DEBUG] Remote 'kampus': 8 active jobs
+[Service] Extract email untuk remote: kampus
+[DEBUG] Section found at position 0-544
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_JMKqdJRzY5FV5QsuXmeVYfMiXeC2Clw48e51bRdz2hk-kDdAG7F4JdYAsSMCDYam-NmCEp
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_JMKqdJRzY5FV5QsuX...
+[DEBUG] Remote 'sthvly': 1 active jobs
+[Service] Extract email untuk remote: sthvly
+[DEBUG] Section found at position 544-1088
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_Ij6N-AlxFHzaqxwDLXHQ0HBD0A0-kjNHMV_qsnvSeBoeO_6ECHIv4IeO37S89aFt7cyxBX
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_Ij6N-AlxFHzaqxwDL...
+[DEBUG] Remote 'zkyle': 4 active jobs
+[Service] Extract email untuk remote: zkyle
+[DEBUG] Section found at position 1088-1631
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_IDOqAJ1i9Ck_up7W-6b8cBy8N4_JSMh4rUl9ArjMntmLQKnIhQMrmdk976KvsN7MYmyfm4
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_IDOqAJ1i9Ck_up7W-...
+[DEBUG] Remote 'sthvly': 1 active jobs
+[Service] Extract email untuk remote: sthvly
+[DEBUG] Section found at position 544-1088
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_Ij6N-AlxFHzaqxwDLXHQ0HBD0A0-kjNHMV_qsnvSeBoeO_6ECHIv4IeO37S89aFt7cyxBX
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_Ij6N-AlxFHzaqxwDL...
+[DEBUG] Remote 'kampus': 8 active jobs
+[Service] Extract email untuk remote: kampus
+[DEBUG] Section found at position 0-544
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_JMKqdJRzY5FV5QsuXmeVYfMiXeC2Clw48e51bRdz2hk-kDdAG7F4JdYAsSMCDYam-NmCEp
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_JMKqdJRzY5FV5QsuX...
+[DEBUG] Remote 'zkyle': 4 active jobs
+[Service] Extract email untuk remote: zkyle
+[DEBUG] Section found at position 1088-1631
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_IDOqAJ1i9Ck_up7W-6b8cBy8N4_JSMh4rUl9ArjMntmLQKnIhQMrmdk976KvsN7MYmyfm4
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_IDOqAJ1i9Ck_up7W-...
+✅ Email ditemukan untuk sthvly: rumpetkiel5@gmail.com
+✅ sthvly: 14.81 GB / 15.00 GB (98.7%) | 1 active jobs | Email: rumpetkiel5@gmail.com
+✅ Email ditemukan untuk kampus: kilerumapea@gmail.com
+✅ kampus: 3.84 GB / 15.00 GB (25.6%) | 8 active jobs | Email: kilerumapea@gmail.com
+✅ Email ditemukan untuk zkyle: rumapeayehezkiel@gmail.com
+✅ zkyle: 1.18 GB / 15.00 GB (7.9%) | 4 active jobs | Email: rumapeayehezkiel@gmail.com
+✅ Email ditemukan untuk sthvly: rumpetkiel5@gmail.com
+✅ sthvly: 14.81 GB / 15.00 GB (98.7%) | 1 active jobs | Email: rumpetkiel5@gmail.com
+✅ Email ditemukan untuk zkyle: rumapeayehezkiel@gmail.com
+✅ zkyle: 1.18 GB / 15.00 GB (7.9%) | 4 active jobs | Email: rumapeayehezkiel@gmail.com
+✅ Email ditemukan untuk kampus: kilerumapea@gmail.com
+✅ kampus: 3.84 GB / 15.00 GB (25.6%) | 8 active jobs | Email: kilerumapea@gmail.com
+[Daemon] Menjalankan sinkronisasi remote dengan rclone.conf...
+
+======================================================================
+[SYNC] 🔄 Starting database sync with rclone.conf
+======================================================================
+[SYNC] 1️⃣ Fetching remotes from rclone.conf...
+[SYNC] ✓ Found 3 remote(s) in rclone.conf: [kampus sthvly zkyle]
+[SYNC] 2️⃣ Fetching remotes from database...
+[SYNC] ✓ Found 3 remote(s) in database: [kampus sthvly zkyle]
+[SYNC] 3️⃣ Finding remotes to delete...
+[SYNC] ✓ No remotes to delete
+[SYNC] 4️⃣ Finding new remotes to add...
+[SYNC] ✓ No new remotes to add
+[SYNC] ✅ Database is already in sync with rclone.conf
+======================================================================
+
+[Daemon] 📡 Checking status for 3 remote(s)...
+[Monitoring] Mengecek remote: kampus
+[Monitoring] Mengecek remote: sthvly
+[Monitoring] Mengecek remote: zkyle
+[DEBUG] Remote 'sthvly': 1 active jobs
+[Service] Extract email untuk remote: sthvly
+[DEBUG] Section found at position 544-1088
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_Ij6N-AlxFHzaqxwDLXHQ0HBD0A0-kjNHMV_qsnvSeBoeO_6ECHIv4IeO37S89aFt7cyxBX
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_Ij6N-AlxFHzaqxwDL...
+[DEBUG] Remote 'kampus': 8 active jobs
+[Service] Extract email untuk remote: kampus
+[DEBUG] Section found at position 0-544
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_JMKqdJRzY5FV5QsuXmeVYfMiXeC2Clw48e51bRdz2hk-kDdAG7F4JdYAsSMCDYam-NmCEp
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_JMKqdJRzY5FV5QsuX...
+[DEBUG] Remote 'zkyle': 4 active jobs
+[Service] Extract email untuk remote: zkyle
+[DEBUG] Section found at position 1088-1631
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_IDOqAJ1i9Ck_up7W-6b8cBy8N4_JSMh4rUl9ArjMntmLQKnIhQMrmdk976KvsN7MYmyfm4
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_IDOqAJ1i9Ck_up7W-...
+✅ Email ditemukan untuk sthvly: rumpetkiel5@gmail.com
+✅ sthvly: 14.81 GB / 15.00 GB (98.7%) | 1 active jobs | Email: rumpetkiel5@gmail.com
+✅ Email ditemukan untuk kampus: kilerumapea@gmail.com
+✅ kampus: 3.84 GB / 15.00 GB (25.6%) | 8 active jobs | Email: kilerumapea@gmail.com
+✅ Email ditemukan untuk zkyle: rumapeayehezkiel@gmail.com
+✅ zkyle: 1.18 GB / 15.00 GB (7.9%) | 4 active jobs | Email: rumapeayehezkiel@gmail.com
+{"time":"2026-01-24T14:03:45.094315733+07:00","id":"","remote_ip":"127.0.0.1","host":"localhost:8080","method":"GET","uri":"/api/v1/monitoring/logs","user_agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36","status":200,"error":"","latency":15057472,"latency_human":"15.057472ms","bytes_in":0,"bytes_out":62342}
+[Daemon] Menjalankan sinkronisasi remote dengan rclone.conf...
+
+======================================================================
+[SYNC] 🔄 Starting database sync with rclone.conf
+======================================================================
+[SYNC] 1️⃣ Fetching remotes from rclone.conf...
+[SYNC] ✓ Found 3 remote(s) in rclone.conf: [kampus sthvly zkyle]
+[SYNC] 2️⃣ Fetching remotes from database...
+[SYNC] ✓ Found 3 remote(s) in database: [kampus sthvly zkyle]
+[SYNC] 3️⃣ Finding remotes to delete...
+[SYNC] ✓ No remotes to delete
+[SYNC] 4️⃣ Finding new remotes to add...
+[SYNC] ✓ No new remotes to add
+[SYNC] ✅ Database is already in sync with rclone.conf
+======================================================================
+
+[Daemon] 📡 Checking status for 3 remote(s)...
+[Monitoring] Mengecek remote: zkyle
+[Monitoring] Mengecek remote: kampus
+[Monitoring] Mengecek remote: sthvly
+[DEBUG] Remote 'kampus': 8 active jobs
+[Service] Extract email untuk remote: kampus
+[DEBUG] Section found at position 0-544
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_JMKqdJRzY5FV5QsuXmeVYfMiXeC2Clw48e51bRdz2hk-kDdAG7F4JdYAsSMCDYam-NmCEp
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_JMKqdJRzY5FV5QsuX...
+[DEBUG] Remote 'sthvly': 1 active jobs
+[Service] Extract email untuk remote: sthvly
+[DEBUG] Section found at position 544-1088
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_Ij6N-AlxFHzaqxwDLXHQ0HBD0A0-kjNHMV_qsnvSeBoeO_6ECHIv4IeO37S89aFt7cyxBX
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_Ij6N-AlxFHzaqxwDL...
+✅ Email ditemukan untuk kampus: kilerumapea@gmail.com
+✅ kampus: 3.84 GB / 15.00 GB (25.6%) | 8 active jobs | Email: kilerumapea@gmail.com
+✅ Email ditemukan untuk sthvly: rumpetkiel5@gmail.com
+✅ sthvly: 14.81 GB / 15.00 GB (98.7%) | 1 active jobs | Email: rumpetkiel5@gmail.com
+[DEBUG] Remote 'zkyle': 4 active jobs
+[Service] Extract email untuk remote: zkyle
+[DEBUG] Section found at position 1088-1631
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_IDOqAJ1i9Ck_up7W-6b8cBy8N4_JSMh4rUl9ArjMntmLQKnIhQMrmdk976KvsN7MYmyfm4
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_IDOqAJ1i9Ck_up7W-...
+✅ Email ditemukan untuk zkyle: rumapeayehezkiel@gmail.com
+✅ zkyle: 1.18 GB / 15.00 GB (7.9%) | 4 active jobs | Email: rumapeayehezkiel@gmail.com
+{"time":"2026-01-24T14:04:05.79731189+07:00","id":"","remote_ip":"127.0.0.1","host":"localhost:8080","method":"GET","uri":"/api/v1/monitoring/logs","user_agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36","status":200,"error":"","latency":3315447,"latency_human":"3.315447ms","bytes_in":0,"bytes_out":62342}
+[Daemon] Menjalankan sinkronisasi remote dengan rclone.conf...
+
+======================================================================
+[SYNC] 🔄 Starting database sync with rclone.conf
+======================================================================
+[SYNC] 1️⃣ Fetching remotes from rclone.conf...
+[SYNC] ✓ Found 3 remote(s) in rclone.conf: [kampus sthvly zkyle]
+[SYNC] 2️⃣ Fetching remotes from database...
+[SYNC] ✓ Found 3 remote(s) in database: [kampus sthvly zkyle]
+[SYNC] 3️⃣ Finding remotes to delete...
+[SYNC] ✓ No remotes to delete
+[SYNC] 4️⃣ Finding new remotes to add...
+[SYNC] ✓ No new remotes to add
+[SYNC] ✅ Database is already in sync with rclone.conf
+======================================================================
+
+[Daemon] 📡 Checking status for 3 remote(s)...
+[Monitoring] Mengecek remote: zkyle
+[Monitoring] Mengecek remote: kampus
+[Monitoring] Mengecek remote: sthvly
+[DEBUG] Remote 'kampus': 8 active jobs
+[Service] Extract email untuk remote: kampus
+[DEBUG] Section found at position 0-544
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_JMKqdJRzY5FV5QsuXmeVYfMiXeC2Clw48e51bRdz2hk-kDdAG7F4JdYAsSMCDYam-NmCEp
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_JMKqdJRzY5FV5QsuX...
+[DEBUG] Remote 'zkyle': 4 active jobs
+[Service] Extract email untuk remote: zkyle
+[DEBUG] Section found at position 1088-1631
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_IDOqAJ1i9Ck_up7W-6b8cBy8N4_JSMh4rUl9ArjMntmLQKnIhQMrmdk976KvsN7MYmyfm4
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_IDOqAJ1i9Ck_up7W-...
+[DEBUG] Remote 'sthvly': 1 active jobs
+[Service] Extract email untuk remote: sthvly
+[DEBUG] Section found at position 544-1088
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_Ij6N-AlxFHzaqxwDLXHQ0HBD0A0-kjNHMV_qsnvSeBoeO_6ECHIv4IeO37S89aFt7cyxBX
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_Ij6N-AlxFHzaqxwDL...
+✅ Email ditemukan untuk kampus: kilerumapea@gmail.com
+✅ kampus: 3.84 GB / 15.00 GB (25.6%) | 8 active jobs | Email: kilerumapea@gmail.com
+✅ Email ditemukan untuk zkyle: rumapeayehezkiel@gmail.com
+✅ zkyle: 1.18 GB / 15.00 GB (7.9%) | 4 active jobs | Email: rumapeayehezkiel@gmail.com
+✅ Email ditemukan untuk sthvly: rumpetkiel5@gmail.com
+✅ sthvly: 14.81 GB / 15.00 GB (98.7%) | 1 active jobs | Email: rumpetkiel5@gmail.com
+[Daemon] Menjalankan sinkronisasi remote dengan rclone.conf...
+
+======================================================================
+[SYNC] 🔄 Starting database sync with rclone.conf
+======================================================================
+[SYNC] 1️⃣ Fetching remotes from rclone.conf...
+[SYNC] ✓ Found 3 remote(s) in rclone.conf: [kampus sthvly zkyle]
+[SYNC] 2️⃣ Fetching remotes from database...
+[SYNC] ✓ Found 3 remote(s) in database: [kampus sthvly zkyle]
+[SYNC] 3️⃣ Finding remotes to delete...
+[SYNC] ✓ No remotes to delete
+[SYNC] 4️⃣ Finding new remotes to add...
+[SYNC] ✓ No new remotes to add
+[SYNC] ✅ Database is already in sync with rclone.conf
+======================================================================
+
+[Daemon] 📡 Checking status for 3 remote(s)...
+[Monitoring] Mengecek remote: zkyle
+[Monitoring] Mengecek remote: kampus
+[Monitoring] Mengecek remote: sthvly
+[DEBUG] Remote 'sthvly': 1 active jobs
+[Service] Extract email untuk remote: sthvly
+[DEBUG] Section found at position 544-1088
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_Ij6N-AlxFHzaqxwDLXHQ0HBD0A0-kjNHMV_qsnvSeBoeO_6ECHIv4IeO37S89aFt7cyxBX
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_Ij6N-AlxFHzaqxwDL...
+[DEBUG] Remote 'zkyle': 4 active jobs
+[Service] Extract email untuk remote: zkyle
+[DEBUG] Section found at position 1088-1631
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_IDOqAJ1i9Ck_up7W-6b8cBy8N4_JSMh4rUl9ArjMntmLQKnIhQMrmdk976KvsN7MYmyfm4
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_IDOqAJ1i9Ck_up7W-...
+[DEBUG] Remote 'kampus': 8 active jobs
+[Service] Extract email untuk remote: kampus
+[DEBUG] Section found at position 0-544
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_JMKqdJRzY5FV5QsuXmeVYfMiXeC2Clw48e51bRdz2hk-kDdAG7F4JdYAsSMCDYam-NmCEp
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_JMKqdJRzY5FV5QsuX...
+✅ Email ditemukan untuk sthvly: rumpetkiel5@gmail.com
+✅ sthvly: 14.81 GB / 15.00 GB (98.7%) | 1 active jobs | Email: rumpetkiel5@gmail.com
+✅ Email ditemukan untuk zkyle: rumapeayehezkiel@gmail.com
+✅ zkyle: 1.18 GB / 15.00 GB (7.9%) | 4 active jobs | Email: rumapeayehezkiel@gmail.com
+✅ Email ditemukan untuk kampus: kilerumapea@gmail.com
+✅ kampus: 3.84 GB / 15.00 GB (25.6%) | 8 active jobs | Email: kilerumapea@gmail.com
+[Daemon] Menjalankan pengecekan status remote...
+[Daemon] 📡 Checking status for 3 remote(s)...
+[Daemon] Menjalankan sinkronisasi remote dengan rclone.conf...
+
+======================================================================
+[SYNC] 🔄 Starting database sync with rclone.conf
+======================================================================
+[SYNC] 1️⃣ Fetching remotes from rclone.conf...
+[Monitoring] Mengecek remote: kampus
+[Monitoring] Mengecek remote: sthvly
+[Monitoring] Mengecek remote: zkyle
+[SYNC] ✓ Found 3 remote(s) in rclone.conf: [kampus sthvly zkyle]
+[SYNC] 2️⃣ Fetching remotes from database...
+[SYNC] ✓ Found 3 remote(s) in database: [kampus sthvly zkyle]
+[SYNC] 3️⃣ Finding remotes to delete...
+[SYNC] ✓ No remotes to delete
+[SYNC] 4️⃣ Finding new remotes to add...
+[SYNC] ✓ No new remotes to add
+[SYNC] ✅ Database is already in sync with rclone.conf
+======================================================================
+
+[Daemon] 📡 Checking status for 3 remote(s)...
+[Monitoring] Mengecek remote: zkyle
+[Monitoring] Mengecek remote: kampus
+[Monitoring] Mengecek remote: sthvly
+[DEBUG] Remote 'kampus': 8 active jobs
+[Service] Extract email untuk remote: kampus
+[DEBUG] Section found at position 0-544
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_JMKqdJRzY5FV5QsuXmeVYfMiXeC2Clw48e51bRdz2hk-kDdAG7F4JdYAsSMCDYam-NmCEp
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_JMKqdJRzY5FV5QsuX...
+[DEBUG] Remote 'sthvly': 1 active jobs
+[Service] Extract email untuk remote: sthvly
+[DEBUG] Section found at position 544-1088
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_Ij6N-AlxFHzaqxwDLXHQ0HBD0A0-kjNHMV_qsnvSeBoeO_6ECHIv4IeO37S89aFt7cyxBX
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_Ij6N-AlxFHzaqxwDL...
+[DEBUG] Remote 'sthvly': 1 active jobs
+[Service] Extract email untuk remote: sthvly
+[DEBUG] Section found at position 544-1088
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_Ij6N-AlxFHzaqxwDLXHQ0HBD0A0-kjNHMV_qsnvSeBoeO_6ECHIv4IeO37S89aFt7cyxBX
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_Ij6N-AlxFHzaqxwDL...
+[DEBUG] Remote 'kampus': 8 active jobs
+[Service] Extract email untuk remote: kampus
+[DEBUG] Section found at position 0-544
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_JMKqdJRzY5FV5QsuXmeVYfMiXeC2Clw48e51bRdz2hk-kDdAG7F4JdYAsSMCDYam-NmCEp
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_JMKqdJRzY5FV5QsuX...
+[DEBUG] Remote 'zkyle': 4 active jobs
+[Service] Extract email untuk remote: zkyle
+[DEBUG] Section found at position 1088-1631
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_IDOqAJ1i9Ck_up7W-6b8cBy8N4_JSMh4rUl9ArjMntmLQKnIhQMrmdk976KvsN7MYmyfm4
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_IDOqAJ1i9Ck_up7W-...
+✅ Email ditemukan untuk kampus: kilerumapea@gmail.com
+✅ kampus: 3.84 GB / 15.00 GB (25.6%) | 8 active jobs | Email: kilerumapea@gmail.com
+[DEBUG] Remote 'zkyle': 4 active jobs
+[Service] Extract email untuk remote: zkyle
+[DEBUG] Section found at position 1088-1631
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_IDOqAJ1i9Ck_up7W-6b8cBy8N4_JSMh4rUl9ArjMntmLQKnIhQMrmdk976KvsN7MYmyfm4
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_IDOqAJ1i9Ck_up7W-...
+✅ Email ditemukan untuk sthvly: rumpetkiel5@gmail.com
+✅ sthvly: 14.81 GB / 15.00 GB (98.7%) | 1 active jobs | Email: rumpetkiel5@gmail.com
+✅ Email ditemukan untuk sthvly: rumpetkiel5@gmail.com
+✅ sthvly: 14.81 GB / 15.00 GB (98.7%) | 1 active jobs | Email: rumpetkiel5@gmail.com
+✅ Email ditemukan untuk kampus: kilerumapea@gmail.com
+✅ kampus: 3.84 GB / 15.00 GB (25.6%) | 8 active jobs | Email: kilerumapea@gmail.com
+✅ Email ditemukan untuk zkyle: rumapeayehezkiel@gmail.com
+✅ zkyle: 1.18 GB / 15.00 GB (7.9%) | 4 active jobs | Email: rumapeayehezkiel@gmail.com
+✅ Email ditemukan untuk zkyle: rumapeayehezkiel@gmail.com
+✅ zkyle: 1.18 GB / 15.00 GB (7.9%) | 4 active jobs | Email: rumapeayehezkiel@gmail.com
+[Daemon] Menjalankan sinkronisasi remote dengan rclone.conf...
+
+======================================================================
+[SYNC] 🔄 Starting database sync with rclone.conf
+======================================================================
+[SYNC] 1️⃣ Fetching remotes from rclone.conf...
+[SYNC] ✓ Found 3 remote(s) in rclone.conf: [kampus sthvly zkyle]
+[SYNC] 2️⃣ Fetching remotes from database...
+[SYNC] ✓ Found 3 remote(s) in database: [kampus sthvly zkyle]
+[SYNC] 3️⃣ Finding remotes to delete...
+[SYNC] ✓ No remotes to delete
+[SYNC] 4️⃣ Finding new remotes to add...
+[SYNC] ✓ No new remotes to add
+[SYNC] ✅ Database is already in sync with rclone.conf
+======================================================================
+
+[Daemon] 📡 Checking status for 3 remote(s)...
+[Monitoring] Mengecek remote: zkyle
+[Monitoring] Mengecek remote: kampus
+[Monitoring] Mengecek remote: sthvly
+[DEBUG] Remote 'zkyle': 4 active jobs
+[Service] Extract email untuk remote: zkyle
+[DEBUG] Section found at position 1088-1631
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_IDOqAJ1i9Ck_up7W-6b8cBy8N4_JSMh4rUl9ArjMntmLQKnIhQMrmdk976KvsN7MYmyfm4
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_IDOqAJ1i9Ck_up7W-...
+[DEBUG] Remote 'kampus': 8 active jobs
+[Service] Extract email untuk remote: kampus
+[DEBUG] Section found at position 0-544
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_JMKqdJRzY5FV5QsuXmeVYfMiXeC2Clw48e51bRdz2hk-kDdAG7F4JdYAsSMCDYam-NmCEp
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_JMKqdJRzY5FV5QsuX...
+[DEBUG] Remote 'sthvly': 1 active jobs
+[Service] Extract email untuk remote: sthvly
+[DEBUG] Section found at position 544-1088
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_Ij6N-AlxFHzaqxwDLXHQ0HBD0A0-kjNHMV_qsnvSeBoeO_6ECHIv4IeO37S89aFt7cyxBX
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_Ij6N-AlxFHzaqxwDL...
+✅ Email ditemukan untuk zkyle: rumapeayehezkiel@gmail.com
+✅ zkyle: 1.18 GB / 15.00 GB (7.9%) | 4 active jobs | Email: rumapeayehezkiel@gmail.com
+✅ Email ditemukan untuk kampus: kilerumapea@gmail.com
+✅ kampus: 3.84 GB / 15.00 GB (25.6%) | 8 active jobs | Email: kilerumapea@gmail.com
+✅ Email ditemukan untuk sthvly: rumpetkiel5@gmail.com
+✅ sthvly: 14.81 GB / 15.00 GB (98.7%) | 1 active jobs | Email: rumpetkiel5@gmail.com
+[Daemon] Menjalankan sinkronisasi remote dengan rclone.conf...
+
+======================================================================
+[SYNC] 🔄 Starting database sync with rclone.conf
+======================================================================
+[SYNC] 1️⃣ Fetching remotes from rclone.conf...
+[SYNC] ✓ Found 3 remote(s) in rclone.conf: [kampus sthvly zkyle]
+[SYNC] 2️⃣ Fetching remotes from database...
+[SYNC] ✓ Found 3 remote(s) in database: [kampus sthvly zkyle]
+[SYNC] 3️⃣ Finding remotes to delete...
+[SYNC] ✓ No remotes to delete
+[SYNC] 4️⃣ Finding new remotes to add...
+[SYNC] ✓ No new remotes to add
+[SYNC] ✅ Database is already in sync with rclone.conf
+======================================================================
+
+[Daemon] 📡 Checking status for 3 remote(s)...
+[Monitoring] Mengecek remote: zkyle
+[Monitoring] Mengecek remote: kampus
+[Monitoring] Mengecek remote: sthvly
+[DEBUG] Remote 'sthvly': 1 active jobs
+[Service] Extract email untuk remote: sthvly
+[DEBUG] Section found at position 544-1088
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_Ij6N-AlxFHzaqxwDLXHQ0HBD0A0-kjNHMV_qsnvSeBoeO_6ECHIv4IeO37S89aFt7cyxBX
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_Ij6N-AlxFHzaqxwDL...
+[DEBUG] Remote 'kampus': 8 active jobs
+[Service] Extract email untuk remote: kampus
+[DEBUG] Section found at position 0-544
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_JMKqdJRzY5FV5QsuXmeVYfMiXeC2Clw48e51bRdz2hk-kDdAG7F4JdYAsSMCDYam-NmCEp
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_JMKqdJRzY5FV5QsuX...
+[DEBUG] Remote 'zkyle': 4 active jobs
+[Service] Extract email untuk remote: zkyle
+[DEBUG] Section found at position 1088-1631
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_IDOqAJ1i9Ck_up7W-6b8cBy8N4_JSMh4rUl9ArjMntmLQKnIhQMrmdk976KvsN7MYmyfm4
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_IDOqAJ1i9Ck_up7W-...
+✅ Email ditemukan untuk kampus: kilerumapea@gmail.com
+✅ kampus: 3.84 GB / 15.00 GB (25.6%) | 8 active jobs | Email: kilerumapea@gmail.com
+✅ Email ditemukan untuk sthvly: rumpetkiel5@gmail.com
+✅ sthvly: 14.81 GB / 15.00 GB (98.7%) | 1 active jobs | Email: rumpetkiel5@gmail.com
+✅ Email ditemukan untuk zkyle: rumapeayehezkiel@gmail.com
+✅ zkyle: 1.18 GB / 15.00 GB (7.9%) | 4 active jobs | Email: rumapeayehezkiel@gmail.com
+[Daemon] Menjalankan sinkronisasi remote dengan rclone.conf...
+
+======================================================================
+[SYNC] 🔄 Starting database sync with rclone.conf
+======================================================================
+[SYNC] 1️⃣ Fetching remotes from rclone.conf...
+[SYNC] ✓ Found 3 remote(s) in rclone.conf: [kampus sthvly zkyle]
+[SYNC] 2️⃣ Fetching remotes from database...
+[SYNC] ✓ Found 3 remote(s) in database: [kampus sthvly zkyle]
+[SYNC] 3️⃣ Finding remotes to delete...
+[SYNC] ✓ No remotes to delete
+[SYNC] 4️⃣ Finding new remotes to add...
+[SYNC] ✓ No new remotes to add
+[SYNC] ✅ Database is already in sync with rclone.conf
+======================================================================
+
+[Daemon] 📡 Checking status for 3 remote(s)...
+[Monitoring] Mengecek remote: zkyle
+[Monitoring] Mengecek remote: kampus
+[Monitoring] Mengecek remote: sthvly
+[DEBUG] Remote 'sthvly': 1 active jobs
+[Service] Extract email untuk remote: sthvly
+[DEBUG] Section found at position 544-1088
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_Ij6N-AlxFHzaqxwDLXHQ0HBD0A0-kjNHMV_qsnvSeBoeO_6ECHIv4IeO37S89aFt7cyxBX
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_Ij6N-AlxFHzaqxwDL...
+[DEBUG] Remote 'kampus': 8 active jobs
+[Service] Extract email untuk remote: kampus
+[DEBUG] Section found at position 0-544
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_JMKqdJRzY5FV5QsuXmeVYfMiXeC2Clw48e51bRdz2hk-kDdAG7F4JdYAsSMCDYam-NmCEp
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_JMKqdJRzY5FV5QsuX...
+[DEBUG] Remote 'zkyle': 4 active jobs
+[Service] Extract email untuk remote: zkyle
+[DEBUG] Section found at position 1088-1631
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_IDOqAJ1i9Ck_up7W-6b8cBy8N4_JSMh4rUl9ArjMntmLQKnIhQMrmdk976KvsN7MYmyfm4
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_IDOqAJ1i9Ck_up7W-...
+✅ Email ditemukan untuk sthvly: rumpetkiel5@gmail.com
+✅ sthvly: 14.81 GB / 15.00 GB (98.7%) | 1 active jobs | Email: rumpetkiel5@gmail.com
+✅ Email ditemukan untuk kampus: kilerumapea@gmail.com
+✅ kampus: 3.84 GB / 15.00 GB (25.6%) | 8 active jobs | Email: kilerumapea@gmail.com
+✅ Email ditemukan untuk zkyle: rumapeayehezkiel@gmail.com
+✅ zkyle: 1.18 GB / 15.00 GB (7.9%) | 4 active jobs | Email: rumapeayehezkiel@gmail.com
+[Daemon] Menjalankan sinkronisasi remote dengan rclone.conf...
+
+======================================================================
+[SYNC] 🔄 Starting database sync with rclone.conf
+======================================================================
+[SYNC] 1️⃣ Fetching remotes from rclone.conf...
+[SYNC] ✓ Found 3 remote(s) in rclone.conf: [kampus sthvly zkyle]
+[SYNC] 2️⃣ Fetching remotes from database...
+[SYNC] ✓ Found 3 remote(s) in database: [kampus sthvly zkyle]
+[SYNC] 3️⃣ Finding remotes to delete...
+[SYNC] ✓ No remotes to delete
+[SYNC] 4️⃣ Finding new remotes to add...
+[SYNC] ✓ No new remotes to add
+[SYNC] ✅ Database is already in sync with rclone.conf
+======================================================================
+
+[Daemon] 📡 Checking status for 3 remote(s)...
+[Monitoring] Mengecek remote: zkyle
+[Monitoring] Mengecek remote: kampus
+[Monitoring] Mengecek remote: sthvly
+[DEBUG] Remote 'zkyle': 4 active jobs
+[Service] Extract email untuk remote: zkyle
+[DEBUG] Section found at position 1088-1631
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_IDOqAJ1i9Ck_up7W-6b8cBy8N4_JSMh4rUl9ArjMntmLQKnIhQMrmdk976KvsN7MYmyfm4
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_IDOqAJ1i9Ck_up7W-...
+[DEBUG] Remote 'kampus': 8 active jobs
+[Service] Extract email untuk remote: kampus
+[DEBUG] Section found at position 0-544
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_JMKqdJRzY5FV5QsuXmeVYfMiXeC2Clw48e51bRdz2hk-kDdAG7F4JdYAsSMCDYam-NmCEp
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_JMKqdJRzY5FV5QsuX...
+[DEBUG] Remote 'sthvly': 1 active jobs
+[Service] Extract email untuk remote: sthvly
+[DEBUG] Section found at position 544-1088
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_Ij6N-AlxFHzaqxwDLXHQ0HBD0A0-kjNHMV_qsnvSeBoeO_6ECHIv4IeO37S89aFt7cyxBX
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_Ij6N-AlxFHzaqxwDL...
+✅ Email ditemukan untuk zkyle: rumapeayehezkiel@gmail.com
+✅ zkyle: 1.18 GB / 15.00 GB (7.9%) | 4 active jobs | Email: rumapeayehezkiel@gmail.com
+✅ Email ditemukan untuk kampus: kilerumapea@gmail.com
+✅ kampus: 3.84 GB / 15.00 GB (25.6%) | 8 active jobs | Email: kilerumapea@gmail.com
+✅ Email ditemukan untuk sthvly: rumpetkiel5@gmail.com
+✅ sthvly: 14.81 GB / 15.00 GB (98.7%) | 1 active jobs | Email: rumpetkiel5@gmail.com
+[Daemon] Menjalankan pengecekan status remote...
+[Daemon] 📡 Checking status for 3 remote(s)...
+[Daemon] Menjalankan sinkronisasi remote dengan rclone.conf...
+
+======================================================================
+[SYNC] 🔄 Starting database sync with rclone.conf
+======================================================================
+[SYNC] 1️⃣ Fetching remotes from rclone.conf...
+[Monitoring] Mengecek remote: kampus
+[Monitoring] Mengecek remote: sthvly
+[Monitoring] Mengecek remote: zkyle
+[SYNC] ✓ Found 3 remote(s) in rclone.conf: [kampus sthvly zkyle]
+[SYNC] 2️⃣ Fetching remotes from database...
+[SYNC] ✓ Found 3 remote(s) in database: [kampus sthvly zkyle]
+[SYNC] 3️⃣ Finding remotes to delete...
+[SYNC] ✓ No remotes to delete
+[SYNC] 4️⃣ Finding new remotes to add...
+[SYNC] ✓ No new remotes to add
+[SYNC] ✅ Database is already in sync with rclone.conf
+======================================================================
+
+[Daemon] 📡 Checking status for 3 remote(s)...
+[Monitoring] Mengecek remote: zkyle
+[Monitoring] Mengecek remote: kampus
+[Monitoring] Mengecek remote: sthvly
+[DEBUG] Remote 'kampus': 8 active jobs
+[Service] Extract email untuk remote: kampus
+[DEBUG] Section found at position 0-544
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_JMKqdJRzY5FV5QsuXmeVYfMiXeC2Clw48e51bRdz2hk-kDdAG7F4JdYAsSMCDYam-NmCEp
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_JMKqdJRzY5FV5QsuX...
+[DEBUG] Remote 'sthvly': 1 active jobs
+[Service] Extract email untuk remote: sthvly
+[DEBUG] Section found at position 544-1088
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_Ij6N-AlxFHzaqxwDLXHQ0HBD0A0-kjNHMV_qsnvSeBoeO_6ECHIv4IeO37S89aFt7cyxBX
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_Ij6N-AlxFHzaqxwDL...
+[DEBUG] Remote 'zkyle': 4 active jobs
+[Service] Extract email untuk remote: zkyle
+[DEBUG] Section found at position 1088-1631
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_IDOqAJ1i9Ck_up7W-6b8cBy8N4_JSMh4rUl9ArjMntmLQKnIhQMrmdk976KvsN7MYmyfm4
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_IDOqAJ1i9Ck_up7W-...
+✅ Email ditemukan untuk kampus: kilerumapea@gmail.com
+✅ kampus: 3.84 GB / 15.00 GB (25.6%) | 8 active jobs | Email: kilerumapea@gmail.com
+[DEBUG] Remote 'kampus': 8 active jobs
+[Service] Extract email untuk remote: kampus
+[DEBUG] Section found at position 0-544
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_JMKqdJRzY5FV5QsuXmeVYfMiXeC2Clw48e51bRdz2hk-kDdAG7F4JdYAsSMCDYam-NmCEp
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_JMKqdJRzY5FV5QsuX...
+✅ Email ditemukan untuk sthvly: rumpetkiel5@gmail.com
+✅ sthvly: 14.81 GB / 15.00 GB (98.7%) | 1 active jobs | Email: rumpetkiel5@gmail.com
+[DEBUG] Remote 'zkyle': 4 active jobs
+[Service] Extract email untuk remote: zkyle
+[DEBUG] Section found at position 1088-1631
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_IDOqAJ1i9Ck_up7W-6b8cBy8N4_JSMh4rUl9ArjMntmLQKnIhQMrmdk976KvsN7MYmyfm4
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_IDOqAJ1i9Ck_up7W-...
+[DEBUG] Remote 'sthvly': 1 active jobs
+[Service] Extract email untuk remote: sthvly
+[DEBUG] Section found at position 544-1088
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_Ij6N-AlxFHzaqxwDLXHQ0HBD0A0-kjNHMV_qsnvSeBoeO_6ECHIv4IeO37S89aFt7cyxBX
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_Ij6N-AlxFHzaqxwDL...
+✅ Email ditemukan untuk zkyle: rumapeayehezkiel@gmail.com
+✅ zkyle: 1.18 GB / 15.00 GB (7.9%) | 4 active jobs | Email: rumapeayehezkiel@gmail.com
+✅ Email ditemukan untuk kampus: kilerumapea@gmail.com
+✅ kampus: 3.84 GB / 15.00 GB (25.6%) | 8 active jobs | Email: kilerumapea@gmail.com
+✅ Email ditemukan untuk zkyle: rumapeayehezkiel@gmail.com
+✅ zkyle: 1.18 GB / 15.00 GB (7.9%) | 4 active jobs | Email: rumapeayehezkiel@gmail.com
+✅ Email ditemukan untuk sthvly: rumpetkiel5@gmail.com
+✅ sthvly: 14.81 GB / 15.00 GB (98.7%) | 1 active jobs | Email: rumpetkiel5@gmail.com
+[Daemon] Menjalankan sinkronisasi remote dengan rclone.conf...
+
+======================================================================
+[SYNC] 🔄 Starting database sync with rclone.conf
+======================================================================
+[SYNC] 1️⃣ Fetching remotes from rclone.conf...
+[SYNC] ✓ Found 3 remote(s) in rclone.conf: [kampus sthvly zkyle]
+[SYNC] 2️⃣ Fetching remotes from database...
+[SYNC] ✓ Found 3 remote(s) in database: [kampus sthvly zkyle]
+[SYNC] 3️⃣ Finding remotes to delete...
+[SYNC] ✓ No remotes to delete
+[SYNC] 4️⃣ Finding new remotes to add...
+[SYNC] ✓ No new remotes to add
+[SYNC] ✅ Database is already in sync with rclone.conf
+======================================================================
+
+[Daemon] 📡 Checking status for 3 remote(s)...
+[Monitoring] Mengecek remote: zkyle
+[Monitoring] Mengecek remote: kampus
+[Monitoring] Mengecek remote: sthvly
+[DEBUG] Remote 'kampus': 8 active jobs
+[Service] Extract email untuk remote: kampus
+[DEBUG] Section found at position 0-544
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_JMKqdJRzY5FV5QsuXmeVYfMiXeC2Clw48e51bRdz2hk-kDdAG7F4JdYAsSMCDYam-NmCEp
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_JMKqdJRzY5FV5QsuX...
+[DEBUG] Remote 'zkyle': 4 active jobs
+[Service] Extract email untuk remote: zkyle
+[DEBUG] Section found at position 1088-1631
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_IDOqAJ1i9Ck_up7W-6b8cBy8N4_JSMh4rUl9ArjMntmLQKnIhQMrmdk976KvsN7MYmyfm4
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_IDOqAJ1i9Ck_up7W-...
+[DEBUG] Remote 'sthvly': 1 active jobs
+[Service] Extract email untuk remote: sthvly
+[DEBUG] Section found at position 544-1088
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_Ij6N-AlxFHzaqxwDLXHQ0HBD0A0-kjNHMV_qsnvSeBoeO_6ECHIv4IeO37S89aFt7cyxBX
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_Ij6N-AlxFHzaqxwDL...
+✅ Email ditemukan untuk kampus: kilerumapea@gmail.com
+✅ kampus: 3.84 GB / 15.00 GB (25.6%) | 8 active jobs | Email: kilerumapea@gmail.com
+✅ Email ditemukan untuk zkyle: rumapeayehezkiel@gmail.com
+✅ zkyle: 1.18 GB / 15.00 GB (7.9%) | 4 active jobs | Email: rumapeayehezkiel@gmail.com
+✅ Email ditemukan untuk sthvly: rumpetkiel5@gmail.com
+✅ sthvly: 14.81 GB / 15.00 GB (98.7%) | 1 active jobs | Email: rumpetkiel5@gmail.com
+[Daemon] Menjalankan sinkronisasi remote dengan rclone.conf...
+
+======================================================================
+[SYNC] 🔄 Starting database sync with rclone.conf
+======================================================================
+[SYNC] 1️⃣ Fetching remotes from rclone.conf...
+[SYNC] ✓ Found 3 remote(s) in rclone.conf: [kampus sthvly zkyle]
+[SYNC] 2️⃣ Fetching remotes from database...
+[SYNC] ✓ Found 3 remote(s) in database: [kampus sthvly zkyle]
+[SYNC] 3️⃣ Finding remotes to delete...
+[SYNC] ✓ No remotes to delete
+[SYNC] 4️⃣ Finding new remotes to add...
+[SYNC] ✓ No new remotes to add
+[SYNC] ✅ Database is already in sync with rclone.conf
+======================================================================
+
+[Daemon] 📡 Checking status for 3 remote(s)...
+[Monitoring] Mengecek remote: zkyle
+[Monitoring] Mengecek remote: kampus
+[Monitoring] Mengecek remote: sthvly
+[DEBUG] Remote 'kampus': 8 active jobs
+[Service] Extract email untuk remote: kampus
+[DEBUG] Section found at position 0-544
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_JMKqdJRzY5FV5QsuXmeVYfMiXeC2Clw48e51bRdz2hk-kDdAG7F4JdYAsSMCDYam-NmCEp
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_JMKqdJRzY5FV5QsuX...
+[DEBUG] Remote 'zkyle': 4 active jobs
+[Service] Extract email untuk remote: zkyle
+[DEBUG] Section found at position 1088-1631
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_IDOqAJ1i9Ck_up7W-6b8cBy8N4_JSMh4rUl9ArjMntmLQKnIhQMrmdk976KvsN7MYmyfm4
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_IDOqAJ1i9Ck_up7W-...
+[DEBUG] Remote 'sthvly': 1 active jobs
+[Service] Extract email untuk remote: sthvly
+[DEBUG] Section found at position 544-1088
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_Ij6N-AlxFHzaqxwDLXHQ0HBD0A0-kjNHMV_qsnvSeBoeO_6ECHIv4IeO37S89aFt7cyxBX
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_Ij6N-AlxFHzaqxwDL...
+✅ Email ditemukan untuk kampus: kilerumapea@gmail.com
+✅ kampus: 3.84 GB / 15.00 GB (25.6%) | 8 active jobs | Email: kilerumapea@gmail.com
+✅ Email ditemukan untuk zkyle: rumapeayehezkiel@gmail.com
+✅ zkyle: 1.18 GB / 15.00 GB (7.9%) | 4 active jobs | Email: rumapeayehezkiel@gmail.com
+✅ Email ditemukan untuk sthvly: rumpetkiel5@gmail.com
+✅ sthvly: 14.81 GB / 15.00 GB (98.7%) | 1 active jobs | Email: rumpetkiel5@gmail.com
+[Daemon] Menjalankan sinkronisasi remote dengan rclone.conf...
+
+======================================================================
+[SYNC] 🔄 Starting database sync with rclone.conf
+======================================================================
+[SYNC] 1️⃣ Fetching remotes from rclone.conf...
+[SYNC] ✓ Found 3 remote(s) in rclone.conf: [kampus sthvly zkyle]
+[SYNC] 2️⃣ Fetching remotes from database...
+[SYNC] ✓ Found 3 remote(s) in database: [kampus sthvly zkyle]
+[SYNC] 3️⃣ Finding remotes to delete...
+[SYNC] ✓ No remotes to delete
+[SYNC] 4️⃣ Finding new remotes to add...
+[SYNC] ✓ No new remotes to add
+[SYNC] ✅ Database is already in sync with rclone.conf
+======================================================================
+
+[Daemon] 📡 Checking status for 3 remote(s)...
+[Monitoring] Mengecek remote: zkyle
+[Monitoring] Mengecek remote: kampus
+[Monitoring] Mengecek remote: sthvly
+[DEBUG] Remote 'sthvly': 1 active jobs
+[Service] Extract email untuk remote: sthvly
+[DEBUG] Section found at position 544-1088
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_Ij6N-AlxFHzaqxwDLXHQ0HBD0A0-kjNHMV_qsnvSeBoeO_6ECHIv4IeO37S89aFt7cyxBX
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_Ij6N-AlxFHzaqxwDL...
+[DEBUG] Remote 'kampus': 8 active jobs
+[Service] Extract email untuk remote: kampus
+[DEBUG] Section found at position 0-544
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_JMKqdJRzY5FV5QsuXmeVYfMiXeC2Clw48e51bRdz2hk-kDdAG7F4JdYAsSMCDYam-NmCEp
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_JMKqdJRzY5FV5QsuX...
+[DEBUG] Remote 'zkyle': 4 active jobs
+[Service] Extract email untuk remote: zkyle
+[DEBUG] Section found at position 1088-1631
+[DEBUG] Token JSON extracted (first 100 chars): {"access_token":"ya29.a0AUMWg_IDOqAJ1i9Ck_up7W-6b8cBy8N4_JSMh4rUl9ArjMntmLQKnIhQMrmdk976KvsN7MYmyfm4
+[DEBUG] Access token extracted (first 30 chars): ya29.a0AUMWg_IDOqAJ1i9Ck_up7W-...
+✅ Email ditemukan untuk sthvly: rumpetkiel5@gmail.com
+✅ sthvly: 14.81 GB / 15.00 GB (98.7%) | 1 active jobs | Email: rumpetkiel5@gmail.com
+✅ Email ditemukan untuk kampus: kilerumapea@gmail.com
+✅ kampus: 3.84 GB / 15.00 GB (25.6%) | 8 active jobs | Email: kilerumapea@gmail.com
+✅ Email ditemukan untuk zkyle: rumapeayehezkiel@gmail.com
+✅ zkyle: 1.18 GB / 15.00 GB (7.9%) | 4 active jobs | Email: rumapeayehezkiel@gmail.com

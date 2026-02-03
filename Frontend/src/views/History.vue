@@ -39,10 +39,7 @@
       <select v-model="selectedStatus" class="filter-select">
         <option value="">All Status</option>
         <option value="SUCCESS">Success</option>
-        <option value="COMPLETED">Completed</option>
         <option value="FAILED">Failed</option>
-        <option value="ERROR">Error</option>
-        <option value="RUNNING">Running</option>
       </select>
 
       <!-- Clear Filters -->
@@ -158,7 +155,7 @@
               <td colspan="8">
                 <div class="detail-content">
                   <div class="detail-section">
-                    <h4>Execution Message</h4>
+                    <h4>📝 Execution Message</h4>
                     <pre class="message-box">{{ log.Message || 'No message available' }}</pre>
                   </div>
 
@@ -182,7 +179,7 @@
                   </div>
 
                   <div v-if="log.ConfigSnapshot" class="detail-section">
-                    <h4>Configuration</h4>
+                    <h4>⚙️ Configuration</h4>
                     <pre class="config-box">{{ formatJSON(log.ConfigSnapshot) }}</pre>
                   </div>
                 </div>
@@ -300,9 +297,19 @@ const filteredLogs = computed(() => {
 
   // Filter by status
   if (selectedStatus.value) {
-    result = result.filter(log =>
-      (log.Status || '').toUpperCase().includes(selectedStatus.value.toUpperCase())
-    );
+    result = result.filter(log => {
+      const status = (log.Status || '').toUpperCase();
+      
+      if (selectedStatus.value === 'SUCCESS') {
+        // Success includes: SUCCESS, COMPLETED
+        return ['SUCCESS', 'COMPLETED'].includes(status);
+      } else if (selectedStatus.value === 'FAILED') {
+        // Failed includes: anything that's NOT success/completed
+        return !['SUCCESS', 'COMPLETED'].includes(status);
+      }
+      
+      return true;
+    });
   }
 
   // Sort by timestamp (newest first)
@@ -508,6 +515,30 @@ function formatJSON(json) {
   color: #666;
   margin: 0;
   font-size: 0.9375rem;
+}
+
+.refresh-btn {
+  background: white;
+  border: 1px solid #e5e5e5;
+  color: #1a1a1a;
+  padding: 0.625rem 1.25rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s;
+}
+
+.refresh-btn:hover:not(:disabled) {
+  background: #f5f5f5;
+  border-color: #1a1a1a;
+}
+
+.refresh-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .spinning {
