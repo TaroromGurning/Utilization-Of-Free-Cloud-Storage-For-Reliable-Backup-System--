@@ -676,7 +676,7 @@ chmod +x start.sh
 ## Support
 
 For issues, questions, or contributions:
-- **Email:** rumapeayehezkiel@gmail.com
+- **Email:** taroromgurning@gmail.com
 
 ---
 
